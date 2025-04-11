@@ -1,0 +1,6 @@
+npm install shadcn@latest
+
+npm install shadcn@latest button
+
+npm install shadcn@lastest card 
+
