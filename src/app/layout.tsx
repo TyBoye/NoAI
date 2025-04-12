@@ -15,7 +15,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Negotiation AI",
-  description: "Need to improve your negotiation skills? Here it is. ",
+  description: "Need to improve your negotiation skills? Here it is. An AI-powered learning method to improve your negotiatiating skills!",
+  keywords: ['negotiation', 'ai', 'practice', 'skills'],
+  category: 'Negotiation'
 };
 
 export default function RootLayout({
