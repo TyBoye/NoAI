@@ -3,7 +3,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 const isPublicRoute = createRouteMatcher([
   '/sign-in(.*)',
   '/sign-up(.*)',
-  //DO NOT REMOVE THIS IS THE ONLY WAY USER HAS ACCESS TO LANDING LMAO
+  //DO NOT REMOVE THIS IS THE ONLY WAY USER HAS ACCESS TO LANDING LOL
   '/'
 ])
 

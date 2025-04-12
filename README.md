@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+What is Negotiation AI - This tool is designed to help a user improve their negotiation skills by providing situations a person can practice, get feedback or receive strategy suggestions
 
-## Getting Started
+The use purpose -
 
-First, run the development server:
+This tool can be used to learn how to negotiate:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+salaries
+project rates
+contact terms
+Deal-Making
+Handling Objections
+Refining Persuasion Techniques
+Simulation Dispute Resolutions
+Settlement Negotiations
+Contract Discussion
+Studying Negotiation Theories with hands-on practice
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+These are just a small list of ways this tool can be used as there are many more!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+So what can we expect from our system
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+We intend to have 
 
-## Learn More
+Simulated Negotiations
+Real-time feedback
+Strategy coaching/Analytics
+Data Driven Insights
 
-To learn more about Next.js, take a look at the following resources:
+How can Someone find this tool to be useful?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
++ This tool can be found very useful for a list of reasons
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
++ This tool allows someone to have a safe environment to practice
 
-## Deploy on Vercel
++ This tool will give personalized feedback
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
++ and this tool will be based on current data and theories
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+--------------------------------
+
+Who Benefits the most from this tool?
+
+Sales professionals, Researchers, Politics, Business and the everyday person.
