@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function Home() {
   return (
@@ -40,27 +41,27 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
             Why Practice with NegotiationAI?
           </h2>
-          <div className="outline">
+          <div className="">
 
-            <div className="flex columns-3 items-center">
-              <Card className="w-[350px]">
-                <CardHeader className="">
+            <div className="flex columns-3 items-center justify-between">
+              <Card className="flex justify-center">
+                <CardHeader className="font-extralight">
                   Realistic Scenarios
                 </CardHeader>
                 <CardDescription>Embrace The World of Negotiation using our AI.</CardDescription>
                 <CardContent></CardContent>
                 <CardFooter></CardFooter>
               </Card>
-              <Card className="w-[350px]">
-                <CardHeader className="">
+              <Card className="flex justify-center">
+                <CardHeader className="font-extralight">
                   Realistic Scenarios
                 </CardHeader>
                 <CardDescription>Embrace The World of Negotiation using our AI.</CardDescription>
                 <CardContent></CardContent>
                 <CardFooter></CardFooter>
               </Card>
-              <Card className="w-[350px]">
-                <CardHeader className="">
+              <Card className="flex justify-center">
+                <CardHeader className="font-extralight">
                   Realistic Scenarios
                 </CardHeader>
                 <CardDescription>Embrace The World of Negotiation using our AI.</CardDescription>
@@ -71,6 +72,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Footer Section */}
+      <Footer />
     </div>
   );
 }
