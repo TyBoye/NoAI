@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function Home() {
   return (
@@ -48,6 +48,7 @@ export default function Home() {
                 <CardHeader className="font-extralight">
                   Realistic Scenarios
                 </CardHeader>
+                <CardTitle></CardTitle>
                 <CardDescription>Embrace The World of Negotiation using our AI.</CardDescription>
                 <CardContent></CardContent>
                 <CardFooter></CardFooter>
