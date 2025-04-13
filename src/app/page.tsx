@@ -1,10 +1,11 @@
 import Link from 'next/link'
-
+import Image from 'next/image'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { BrainCog, Zap, Building2 } from 'lucide-react'
+import Chat from '@/app/assets/chatlog.svg'
 
 export default function Home() {
   return (
@@ -38,10 +39,11 @@ export default function Home() {
           </div>
           <div className="mt-12 lg:mt-0 lg:col-span-6 flex items-center justify-center">
               <div className="w-full max-w-md">
-                <img
-                  src="https://placehold.co/600x700/ffa500/ffffff?text=Chat+Data"
-                  alt="Negotiation Data"
-                  className="rounded-xl shadow-xl"
+                <Image
+                  src={Chat}
+                  width={600}
+                  height={700}
+                  alt="Negotiation Chat Sample Data"
                 />
               </div>
             </div>
