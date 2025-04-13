@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://no-ai.vercel.app'),
   title: "Negotiation.AI | Home",
   description: "Need to improve your negotiation skills? Here it is. An AI-powered learning method to improve your negotiatiating skills!",
   keywords: ['negotiation', 'ai', 'practice', 'skills'],
@@ -47,7 +48,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        elements: {
+          formButtonPrimary: 'bg-orange-500 hover:bg-orange-600',
+        },
+      }}
+    >
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
