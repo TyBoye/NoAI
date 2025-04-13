@@ -59,37 +59,44 @@ export default function Home() {
           </h2>
           <div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <Card className="flex flex-col shadow-2xl px-8 py-12">
+              <Card className="flex flex-col shadow-2xl px-8 py-12 transition-all duration-300 hover:shadow-orange-200 hover:scale-105">
                 <CardTitle className=" text-4xl text-orange-600 flex justify-center">
-                  <span className="bg-amber-500 rounded-full p-4">
+                  <span className="bg-amber-500 rounded-full p-4 transition-all duration-300 hover:bg-orange-600">
                   <Building2 className="text-white"/>
                   </span>
                 </CardTitle>
                 <CardHeader className="text-orange-600 flex justify-center font-bold text-lg">Realistic Scenarios</CardHeader>
                 <CardDescription className="flex justify-center text-md">Practice in a variety of real-world situations. Weathers its a business deal or salary negotiation</CardDescription>
               </Card>
-              <Card className="flex flex-col shadow-2xl px-8 py-12">
+              <Card className="flex flex-col shadow-2xl px-8 py-12 transition-all duration-300 hover:shadow-orange-200 hover:scale-105">
                 <CardTitle className=" text-4xl text-orange-600 flex justify-center">
-                  <span className="bg-amber-500 rounded-full p-4">
+                  <span className="bg-amber-500 rounded-full p-4 transition-all duration-300 hover:bg-orange-600">
                   <Zap className="text-white"/>
                   </span>
                 </CardTitle>
                 <CardHeader className="text-orange-600 flex justify-center font-bold text-lg">Instant Feedback</CardHeader>
                 <CardDescription className="flex justify-center text-md">Get real-time analysis of your negotiation tactics and suggestions for improvement.</CardDescription>
               </Card>
-              <Card className="flex flex-col shadow-2xl px-8 py-12">
+              <Card className="flex flex-col shadow-2xl px-8 py-12 transition-all duration-300 hover:shadow-orange-200 hover:scale-105">
                 <CardTitle className=" text-4xl text-orange-600 flex justify-center">
-                  <span className="bg-amber-500 rounded-full p-4">
+                  <span className="bg-amber-500 rounded-full p-4 transition-all duration-300 hover:bg-orange-600">
                   <BrainCog className="text-white"/>
                   </span>
                 </CardTitle>
                 <CardHeader className="text-orange-600 flex justify-center font-bold text-lg">Learn Techniques</CardHeader>
                 <CardDescription className="flex justify-center text-md">Master proven negotition strategies and apply them in your practice lessions.</CardDescription>
-               
               </Card>
             </div>
           </div>
         </div>
+      </section>
+      {/* CTA Section */}
+      <section>
+      <div className="">
+        <div>
+          
+        </div>
+      </div>
       </section>
       {/* Footer Section */}
       <Footer />

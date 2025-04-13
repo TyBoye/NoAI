@@ -22,7 +22,7 @@ export const metadata = {
   openGraph: {
     title: 'Negotiation.AI - Master The Art Of Negotiation',
     description: 'Practice your negotiation skills with our AI-powered chatbot. Get real-time feedback and improve with every conversation.',
-    url: 'https://negotiation-ai.vercel.app',
+    url: 'https://no-ai.vercel.app/',
     siteName: 'Negotiation.AI',
     images: [
       {
