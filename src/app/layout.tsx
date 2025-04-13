@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {  ClerkProvider } from '@clerk/nextjs'
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -13,11 +12,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Negotiation AI",
+export const metadata = {
+  title: "Negotiation AI | Home",
   description: "Need to improve your negotiation skills? Here it is. An AI-powered learning method to improve your negotiatiating skills!",
   keywords: ['negotiation', 'ai', 'practice', 'skills'],
-  category: 'Negotiation'
+  authors: [{name: 'NegotiationAI'}],
+  creator: 'NegotiationAI',
+  publisher: 'NegotiationAI',
 };
 
 export default function RootLayout({

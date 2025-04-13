@@ -20,7 +20,7 @@ export default function Navbar() {
                 Negotiation AI
               </Link>
             </div>
-            <div className="hidden md:block">
+            <div className="">
               <div className="flex items-center gap-4">
                 <SignedOut>
                   <SignInButton>
