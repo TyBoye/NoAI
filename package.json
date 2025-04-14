@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/xai": "^1.2.11",
     "@clerk/nextjs": "^6.14.3",
     "@radix-ui/react-slot": "^1.2.0",
     "class-variance-authority": "^0.7.1",

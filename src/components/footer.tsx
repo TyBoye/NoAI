@@ -6,13 +6,13 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
     return (
         <>
-        <footer className="w-full sticky bg-orange-100 border-t">
+        <footer className="w-full sticky bg-gray-200">
             <div className="max-w-8xl mx-auto px-4">
                 <div className="flex items-center justify-center h-16">
                 <div className="flex-shrink-0 flex items-center gap-2">
               <Image
                 src={Logo}
-                alt="NoAI Logo"
+                alt="Negotiation.AI Logo"
                 width={16}
                 height={16}
                 className="w-8 h-8"

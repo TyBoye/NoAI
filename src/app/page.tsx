@@ -5,7 +5,7 @@ import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { BrainCog, Zap, Building2 } from 'lucide-react'
-import Chat from '@/app/assets/chatlog.svg'
+import Chat from '@/app/assets/chat.svg'
 import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs'
 
 export default function Home() {
@@ -94,12 +94,39 @@ export default function Home() {
         </div>
       </section>
       {/* CTA Section */}
-      <section>
-      <div className="">
-        <div>
-          
+      <section className="py-16 bg-[#d8b48b]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6">Ready to Improve Your Negotiation Skills?</h2>
+          <p className="text-md md:text-lg text-white mb-8">Be among the few who take the first step and turn every negotiation into a win.</p>
+          <div className="flex justify-center gap-4">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button 
+                className="bg-orange-500 text-white hover:bg-orange-600" 
+                variant='default' 
+                size='default'>
+                  Sign Up Today
+                </Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <Link href="/dashboard">
+                <Button 
+                className="bg-orange-500 text-white opacity-80 hover:bg-orange-600"
+                variant='default' 
+                size='default'>
+                  Start Practicing Today
+                </Button>
+              </Link>
+            </SignedIn>
+          </div>
+          <Button
+            className="mt-4 opacity-80"
+            variant="default"
+            size="lg">
+              Learn More
+            </Button>
         </div>
-      </div>
       </section>
       {/* Footer Section */}
       <Footer />
