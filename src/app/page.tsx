@@ -26,14 +26,18 @@ export default function Home() {
           <div className="flex justify-center gap-4">
             <SignedOut>
               <SignInButton mode="modal">
-                <Button className="bg-orange-500 text-white" variant='outline' size='lg'>
+                <Button className="bg-orange-500 text-white" 
+                variant='outline' 
+                size='lg'>
                   Start Practicing Today
                 </Button>
               </SignInButton>
             </SignedOut>
             <SignedIn>
               <Link href="/dashboard">
-                <Button className="bg-orange-500 text-white" variant='outline' size='lg'>
+                <Button className="bg-orange-500 text-white" 
+                variant='outline' 
+                size='lg'>
                   Start Practicing Today
                 </Button>
               </Link>
@@ -69,7 +73,7 @@ export default function Home() {
                   </span>
                 </CardTitle>
                 <CardHeader className="text-orange-600 flex justify-center font-bold text-lg">Realistic Scenarios</CardHeader>
-                <CardDescription className="flex justify-center text-md">Practice in a variety of real-world situations. Weathers its a business deal or salary negotiation</CardDescription>
+                <CardDescription className="flex justify-center text-md">Practice in a variety of real-world situations. Weather its a business deal or salary negotiation</CardDescription>
               </Card>
               <Card className="flex flex-col shadow-2xl px-8 py-12 transition-all duration-300 hover:shadow-orange-200 hover:scale-105">
                 <CardTitle className=" text-4xl text-orange-500 flex justify-center">
@@ -87,7 +91,7 @@ export default function Home() {
                   </span>
                 </CardTitle>
                 <CardHeader className="text-orange-500 flex justify-center font-bold text-lg">Learn Techniques</CardHeader>
-                <CardDescription className="flex justify-center text-md">Master proven negotition strategies and apply them in your practice lessions.</CardDescription>
+                <CardDescription className="flex justify-center text-md">Master proven negotiation strategies and apply them in your practice lessons.</CardDescription>
               </Card>
             </div>
           </div>
