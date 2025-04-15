@@ -5,7 +5,7 @@ import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { BrainCog, Zap, Building2 } from 'lucide-react'
-import Chat from '@/app/assets/chat.svg'
+import Chat from '@/app/assets/test3.svg'
 import { SignInButton, SignedIn, SignedOut } from '@clerk/nextjs'
 
 export default function Home() {
