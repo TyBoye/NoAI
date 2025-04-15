@@ -61,12 +61,12 @@ Negotiation AI is perfect for learning and practicing how to negotiate:
 
 ## Features
 
-- **Simulated Negotiations** – Practice real-world situations  
-- **Real-Time Feedback** – Understand your negotiation strengths and gaps instantly  
-- **Strategy Coaching & Analytics** – Receive actionable suggestions based on your responses  
-- **Data-Driven Insights** – Leverage current theories and data to make smarter moves  
-- **Personalized Feedback** – Tailored suggestions and improvements  
-- **Safe Practice Environment** – Learn without pressure or risk
+- Simulated Negotiations
+- Real-Time Feedback 
+- Strategy Coaching & Analytics
+- Data-Driven Insights 
+- Personalized Feedback
+- Safe Practice Environment
 
 
 ## Tech Stack
