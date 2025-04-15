@@ -1,43 +1,84 @@
-What is Negotiation AI - This tool is designed to help a user improve their negotiation skills by providing situations a person can practice, get feedback or receive strategy suggestions
+# Negotiation AI
 
-The use purpose -
+AI-Powered Negotiation Assistant.
+An AI-driven platform to support strategic negotiations with smart prompts, summaries, and real-time insights.
 
-This tool can be used to learn how to negotiate:
+## Table of Contents
 
-salaries
-project rates
-contact terms
-Deal-Making
-Handling Objections
-Refining Persuasion Techniques
-Simulation Dispute Resolutions
-Settlement Negotiations
-Contract Discussion
-Studying Negotiation Theories with hands-on practice
+- [About](#about)
+- [Why Use This Tool](#why-use-this-tool)
+- [Who Benefits](#who-benefits) 
+- [Applications](#applications)   
+- [Features](#features)  
+- [Tech Stack](#tech-stack)  
+- [Getting Started](#getting-started) 
 
-These are just a small list of ways this tool can be used as there are many more!
 
-So what can we expect from our system
+## About
 
-We intend to have 
+**Negotiation AI** is a tool designed to assist professionals in preparing for and navigating negotiations with more clarity and confidence. It provides real-time AI support tailored to negotiation best practices, making it easier to reach better outcomes—whether you're handling job offers, pricing discussions, or business deals.
 
-Simulated Negotiations
-Real-time feedback
-Strategy coaching/Analytics
-Data Driven Insights
 
-How can Someone find this tool to be useful?
+## Why Use This Tool
 
-+ This tool can be found very useful for a list of reasons
+This tool is useful for several key reasons:
 
-+ This tool allows someone to have a safe environment to practice
+- Provides a safe environment to practice real negotiation scenarios  
+- Offers personalized feedback based on your responses  
+- Applies current data, research, and negotiation theories  
+- Helps users grow and refine their strategies in a risk-free setting
+  
 
-+ This tool will give personalized feedback
+## Who Benefits
 
-+ and this tool will be based on current data and theories
+Negotiation AI can support a wide variety of users, including:
 
---------------------------------
+- Sales professionals  
+- Business negotiators  
+- Researchers studying negotiation  
+- Political communicators  
+- Students and educators  
+- Everyday users looking to strengthen life skills
 
-Who Benefits the most from this tool?
 
-Sales professionals, Researchers, Politics, Business and the everyday person.
+## Applications
+
+Negotiation AI is perfect for learning and practicing how to negotiate:
+
+- Salaries  
+- Project rates  
+- Contact terms  
+- Business deals  
+- Handling objections  
+- Refining persuasion techniques  
+- Simulation of dispute resolutions  
+- Settlement negotiations  
+- Contract discussions  
+- Studying negotiation theories through hands-on experience  
+
+> These are just a few examples—negotiation happens everywhere, and this tool adapts to many situations.
+
+
+## Features
+
+- Simulated Negotiations
+- Real-Time Feedback 
+- Strategy Coaching & Analytics
+- Data-Driven Insights 
+- Personalized Feedback
+- Safe Practice Environment
+
+
+## Tech Stack
+
+- **Frontend:** TypeScript, Next.js, Tailwind CSS, Shadcn/UI  
+- **Backend:** Node.js, Express, PostgresSQL
+- **AI:** Groq API 
+- **Others:** Postman, Zod, Vercel (deployment)
+
+
+## Getting Started
+
+To run Negotiation AI, follow these steps.
+
+Then open [no-ai.vercel.app](https://no-ai.vercel.app/) in your browser.
