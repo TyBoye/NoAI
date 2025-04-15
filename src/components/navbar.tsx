@@ -53,7 +53,7 @@ export default function Navbar() {
                 passHref
               >
                 <Button
-                  className="bg-[#ff914d] hover:bg-orange-600 text-white transition-colors"
+                  className="bg-[#ff914d] hover:bg-orange-400 text-white transition-colors"
                   size="sm"
                 >
                   {loading === "signup" ? (

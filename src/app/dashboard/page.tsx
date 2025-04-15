@@ -1,19 +1,118 @@
-import { auth } from "@clerk/nextjs/server";
-import Nav from "@/components/navbar";
-import Chat from '@/components/chatbot'
+'use client'
+import Chat from '@/components/chatbot';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeftToLine, ArrowRightToLine, House, Boxes, MessageSquare} from 'lucide-react';
+import Logo from '@/app/assets/NoAI.svg';
+import { useState } from 'react';
+import { UserButton, useUser } from "@clerk/nextjs";
 
-export default async function Dashboard() {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
+export default function Dashboard() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const { isSignedIn, user, isLoaded } = useUser();
+
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  if (!isLoaded) return <div>Loading...</div>;
+  if (!isSignedIn) return <div>Sign in to view this page</div>;
 
   return (
-    <div className="min-h-screen bg-white">
-        <Nav />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Welcome to Your Dashboard</h1>
-        <Chat />
-        
-      </div>
+    <div className="flex">
+    {/* Thy Sidebar */}
+    <aside className={`h-screen transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
+        <nav className="h-full flex flex-col bg-white border-r">
+          <div className="p-4 pb-2 flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Image src={Logo} alt="logo" width={32} height={32} className="w-8 h-8"/>
+              {!isCollapsed && <Link href="/" className="text-xl font-bold">Negotiation.AI</Link>}
+            </div>
+            <button 
+              className="p-1.5 rounded-lg hover:bg-gray-100" 
+              onClick={toggleSidebar}
+            >
+              {isCollapsed ? 
+                <ArrowRightToLine className="w-5 h-5"/> : 
+                <ArrowLeftToLine className="w-5 h-5"/>
+              }
+            </button>
+          </div>
+
+          {/* Still unsure about links, will need to be expanded on */}
+          <ul className="space-y-2 px-3 mt-4">
+            <li>
+              <Link href="/dashboard" className={`flex items-center gap-3 p-2 rounded-lg hover:bg-orange-400 ${isCollapsed ? 'justify-center' : ''}`}>
+                <House className="w-5 h-5" />
+                {!isCollapsed && <span>Dashboard</span>}
+              </Link>
+            </li>
+            <li>
+              <Link href="/dashboard" className={`flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 ${isCollapsed ? 'justify-center' : ''}`}>
+                <Boxes className="w-5 h-5" />
+                {!isCollapsed && <span>Coming Soon</span>}{/* Should we even do analytics right now? Like I dont think we have time now. */}
+              </Link>
+            </li>
+            <li>
+              <Link href="/dashboard" className={`flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 ${isCollapsed ? 'justify-center' : ''}`}>
+                <MessageSquare className="w-5 h-5" />
+                {!isCollapsed && <span>Senarios</span>}{/* I think this will be the senarios section, so this will be a dropdown menu */}
+              </Link>
+            </li>
+          </ul>
+
+          {/* Chat History Section will need to be expanded on to include database load and so on
+          this is where all our past chats for each user will display */}
+          {!isCollapsed && (
+            <div className="mt-6 px-3 flex-1 overflow-hidden flex flex-col">
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="px-2 text-sm font-semibold text-gray-500">RECENT CHATS</h3>
+                </div>
+            </div>
+          )}
+          
+
+          {/* This is the User Profile Section 
+          Below you can see that the user can see their first and last name, and "Manage their account" Thats only true
+          if the user clicks on their profile picture. I could not figure out how to make that work. So if someone can figure this
+          issue out, please let me know.*/}
+          <div className="mt-auto border-t p-4">
+            <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
+              <UserButton afterSignOutUrl="/"/>
+              {!isCollapsed && (
+                <div className="flex flex-col">
+                  <span className="font-medium">{user?.firstName} {user?.lastName}</span>
+                  <span className="text-sm text-gray-500">Manage account</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </nav>
+      </aside>
+
+      {/* This is all the content that will display inside the dashboard*/}
+      <main className="flex-1 p-8 overflow-auto">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">
+            Welcome to Your Dashboard, {user?.firstName}
+          </h1>
+          
+      
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <div className="h-full flex flex-col">
+              <div className="flex-1 overflow-y-auto mb-4">
+              </div>
+              <div className="border-t pt-4">
+                 {/* the chat bot will need a bit of a rework to make sure that it does 
+                 not overflow the page and does no look silly*/}
+                <Chat />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 } 
+

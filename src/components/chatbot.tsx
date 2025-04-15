@@ -1,5 +1,4 @@
 'use client';
-
 import { useChat } from '@ai-sdk/react';
 import { Loader2 } from 'lucide-react';
 
@@ -8,38 +7,45 @@ export default function Page() {
     useChat({
       api: '/api/chat',
       body: {
-        user_id: '123', // assuming this is connected to the logged-in user - refer to our clerk docs
+        user_id: '123', // assuming this is connected to the logged-in user - refer to our clerk docs 
+        // looking deeper into this im not sure if this will benefit us in the future
       },
     });
 
   return (
     <>
-      <div className="flex flex-col gap-3 p-4">
+      <div className="flex flex-col h-96 ">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map(message => {
           const isUser = message.role === 'user'; // Check if the message is from the user
           
           const bubbleClasses = isUser 
-            ? 'bg-orange-500 text-white self-end ' 
+            ? 'bg-orange-500 text-white self-end' 
             : 'bg-[#c8a47b] text-black self-start';
 
           return (
-            <div key={message.id} className={`max-w-sm p-4 rounded-3xl text-sm break-words ${bubbleClasses}`}>
-              <div className="font-bold">{isUser ? 'User: ' : 'AI: '}</div>
+            <div 
+            key={message.id} className={`flex flex-col max-w-lg p-4 rounded-3xl text-sm break-words ${bubbleClasses}`}>
+              <div className="font-bold mb-1">{isUser ? 'You: ' : 'AI: '}</div>
               {message.content}
             </div>
           );
         })}
+      {/* This button will stop the chatbot from generating bt the only issue is that the button is hard to click
+      and the text is hard to read. Need to figure out a way to fix this */}
       </div>
+      <div className="flex justify-start">
       {(status === 'submitted' || status === 'streaming') && (
         <div>
           {status === 'submitted' && <Loader2 />}
           <button
-          className=""
+          className="bg-orange-500 text-white px-2 py-2"
           type="button" onClick={() => stop()}>
             Stop
           </button>
         </div>
       )}
+       </div>
 
       {error && (
         <>
@@ -49,7 +55,8 @@ export default function Page() {
           </button>
         </>
       )}
-
+       </div>
+ 
     
       <form onSubmit={handleSubmit}>
         <span className="flex col-2 gap-3">
@@ -68,6 +75,7 @@ export default function Page() {
         </button>
         </span>
       </form>
+      
     </>
   );
 }
