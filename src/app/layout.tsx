@@ -27,7 +27,7 @@ export const metadata = {
     siteName: 'Negotiation.AI',
     images: [
       {
-        url: '/public/op-image.png',
+        url: 'https://no-ai.vercel.app/op-image.png',
         width: 1200,
         height: 630,
         alt: 'Negotiation.AI - AI-Powered Negotiation Practice',
