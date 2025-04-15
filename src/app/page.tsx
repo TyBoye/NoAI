@@ -18,7 +18,7 @@ export default function Home() {
             <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-6">
             Master The Art Of
-            <span className="text-orange-500"> Negotiation</span>
+            <span className="text-[#ff914d]"> Negotiation</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Practice your negotiation skills with our AI-powered chatbot. Get real-time feedback and improve with every conversation.  
@@ -26,7 +26,7 @@ export default function Home() {
           <div className="flex justify-center gap-4">
             <SignedOut>
               <SignInButton mode="modal">
-                <Button className="bg-orange-500 text-white" 
+                <Button className="bg-[#ff914d] text-white" 
                 variant='outline' 
                 size='lg'>
                   Start Practicing Today
@@ -35,7 +35,7 @@ export default function Home() {
             </SignedOut>
             <SignedIn>
               <Link href="/dashboard">
-                <Button className="bg-orange-500 text-white" 
+                <Button className="bg-[#ff914d] text-white" 
                 variant='outline' 
                 size='lg'>
                   Start Practicing Today
@@ -67,30 +67,30 @@ export default function Home() {
           <div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <Card className="flex flex-col shadow-2xl px-8 py-12 transition-all duration-300 hover:shadow-orange-200 hover:scale-105">
-                <CardTitle className=" text-4xl text-orange-500 flex justify-center">
-                  <span className="bg-orange-500 rounded-full p-4 transition-all duration-300 hover:bg-orange-600">
+                <CardTitle className=" text-4xl text-[#ff914d] flex justify-center">
+                  <span className="bg-[#ff914d] rounded-full p-4 transition-all duration-300 hover:bg-orange-400">
                   <Building2 className="text-white"/>
                   </span>
                 </CardTitle>
-                <CardHeader className="text-orange-600 flex justify-center font-bold text-lg">Realistic Scenarios</CardHeader>
+                <CardHeader className="text-[#ff914d] flex justify-center font-bold text-lg">Realistic Scenarios</CardHeader>
                 <CardDescription className="flex justify-center text-md">Practice in a variety of real-world situations. Weather its a business deal or salary negotiation</CardDescription>
               </Card>
               <Card className="flex flex-col shadow-2xl px-8 py-12 transition-all duration-300 hover:shadow-orange-200 hover:scale-105">
-                <CardTitle className=" text-4xl text-orange-500 flex justify-center">
-                  <span className="bg-orange-500 rounded-full p-4 transition-all duration-300 hover:bg-orange-600">
+                <CardTitle className=" text-4xl text-[#ff914d] flex justify-center">
+                  <span className="bg-[#ff914d] rounded-full p-4 transition-all duration-300 hover:bg-orange-400">
                   <Zap className="text-white"/>
                   </span>
                 </CardTitle>
-                <CardHeader className="text-orange-500 flex justify-center font-bold text-lg">Instant Feedback</CardHeader>
+                <CardHeader className="text-[#ff914d] flex justify-center font-bold text-lg">Instant Feedback</CardHeader>
                 <CardDescription className="flex justify-center text-md">Get real-time analysis of your negotiation tactics and suggestions for improvement.</CardDescription>
               </Card>
               <Card className="flex flex-col shadow-2xl px-8 py-12 transition-all duration-300 hover:shadow-orange-200 hover:scale-105">
-                <CardTitle className=" text-4xl text-orange-500 flex justify-center">
-                  <span className="bg-orange-500 rounded-full p-4 transition-all duration-300 hover:bg-orange-600">
+                <CardTitle className=" text-4xl text-[#ff914d] flex justify-center">
+                  <span className="bg-[#ff914d] rounded-full p-4 transition-all duration-300 hover:bg-orange-400">
                   <BrainCog className="text-white"/>
                   </span>
                 </CardTitle>
-                <CardHeader className="text-orange-500 flex justify-center font-bold text-lg">Learn Techniques</CardHeader>
+                <CardHeader className="text-[#ff914d] flex justify-center font-bold text-lg">Learn Techniques</CardHeader>
                 <CardDescription className="flex justify-center text-md">Master proven negotiation strategies and apply them in your practice lessons.</CardDescription>
               </Card>
             </div>
@@ -106,7 +106,7 @@ export default function Home() {
             <SignedOut>
               <SignInButton mode="modal">
                 <Button 
-                className="bg-orange-500 text-white hover:bg-orange-600" 
+                className="bg-[#ff914d] text-white hover:bg-orange-400" 
                 variant='default' 
                 size='default'>
                   Sign Up Today
@@ -116,7 +116,7 @@ export default function Home() {
             <SignedIn>
               <Link href="/dashboard">
                 <Button 
-                className="bg-orange-500 text-white opacity-80 hover:bg-orange-600"
+                className="bg-[#ff914d] text-white opacity-80 hover:bg-orange-400"
                 variant='default' 
                 size='default'>
                   Start Practicing Today

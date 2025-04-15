@@ -44,7 +44,7 @@ export default function Navbar() {
                   </SignInButton>
                   <SignUpButton>
                     <Button
-                      className="bg-orange-500 hover:bg-orange-600 text-white transition-colors"
+                      className="bg-[#ff914d] hover:bg-orange-600 text-white transition-colors"
                       size="sm"
                     >
                       <Link href="#" className="flex items-center gap-2">
