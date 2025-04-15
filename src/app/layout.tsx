@@ -27,7 +27,7 @@ export const metadata = {
     siteName: 'Negotiation.AI',
     images: [
       {
-        url: '/og-image.png',
+        url: '/public/op-image.png',
         width: 1200,
         height: 630,
         alt: 'Negotiation.AI - AI-Powered Negotiation Practice',
