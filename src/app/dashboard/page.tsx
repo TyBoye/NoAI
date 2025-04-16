@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { ArrowLeftToLine, ArrowRightToLine, House, Boxes, MessageSquare } from 'lucide-react';
 import Logo from '@/app/assets/NoAI.svg';
 import { useState } from 'react';
-import { UserButton, useUser } from "@clerk/nextjs";
+import { UserButton, useUser, useClerk } from "@clerk/nextjs";
 
 export default function Dashboard() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState('dashboard');
-
+  const { openUserProfile } = useClerk();
   const { isSignedIn, user, isLoaded } = useUser();
 
   const toggleSidebar = () => {
@@ -91,14 +91,18 @@ export default function Dashboard() {
           {/* This is the User Profile Section 
           Below you can see that the user can see their first and last name, and "Manage their account" Thats only true
           if the user clicks on their profile picture. I could not figure out how to make that work. So if someone can figure this
-          issue out, please let me know.*/}
+          issue out, please let me know. - solved using useClerk I was able to use a onClick function to open the user profile*/}
           <div className="mt-auto border-t p-4">
             <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
               <UserButton afterSignOutUrl="/" />
               {!isCollapsed && (
                 <div className="flex flex-col">
                   <span className="font-medium">{user?.firstName} {user?.lastName}</span>
-                  <span className="text-sm text-gray-500">Manage account</span>
+                  <span className="text-sm text-gray-500 cursor-pointer hover:text-gray-700"
+                  onClick={() => openUserProfile()}
+                  >
+                    Manage account
+                  </span>
                 </div>
               )}
             </div>
@@ -119,7 +123,7 @@ export default function Dashboard() {
               </div>
               <div className="border-t pt-4">
                 {/* the chat bot will need a bit of a rework to make sure that it does 
-                 not overflow the page and does no look silly*/}
+                 not overflow the page and does not look silly*/}
                 <Chat />
               </div>
             </div>
