@@ -38,7 +38,7 @@ export default function Page() {
             const isUser = message.role === "user"; // Check if the message is from the user
 
             const bubbleClasses = isUser
-              ? "bg-orange-500 text-white"
+              ? "bg-[#ff914d] text-white"
               : "bg-[#c8a47b] text-black";
 
             const alignment = isUser ? "justify-end" : "justify-start";
@@ -68,7 +68,7 @@ export default function Page() {
                 <Loader2 className="animate-spin w-4 h-4" />
               )}
               <button
-                className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 shadow-md"
+                className="bg-[#ff914d] text-white px-4 py-2 rounded-md hover:bg-orange-400 shadow-md"
                 type="button"
                 onClick={() => stop()}
               >
@@ -112,7 +112,7 @@ export default function Page() {
           />
           <button
             type="submit"
-            className="bg-orange-500 text-white px-4 py-1 rounded-lg hover:bg-white hover:text-orange-500 border shadow-md border-orange-500 transition-colors duration-300"
+            className="bg-[#ff914d] text-white px-4 py-1 rounded-lg hover:bg-white hover:text-orange-400 border shadow-md border-orange-500 transition-colors duration-300"
             disabled={status !== "ready"}
           >
             Submit

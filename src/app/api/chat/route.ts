@@ -11,6 +11,13 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
   const { messages } = await req.json();
 
+
+
+  messages.push({
+    role: 'system',
+    content: 'You are a negotiation coach. Keep responses short, clear, and under 3 sentences unless asked to elaborate. Once the negotiation is complete, thank the user for their time and ask them to rate the negotiation.',
+  });
+
   const result = streamText({
     model: groq('llama-3.1-8b-instant'),
     messages,

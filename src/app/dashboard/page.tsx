@@ -47,7 +47,7 @@ export default function Dashboard() {
               <button
                 onClick={() => setActiveItem('dashboard')}
                 className={`w-full text-left flex items-center gap-3 p-2 rounded-lg 
-                ${activeItem === 'dashboard' ? 'bg-orange-500 text-white font-semibold' : 'hover:bg-gray-100'} 
+                ${activeItem === 'dashboard' ? 'bg-[#ff914d] text-white font-semibold' : 'hover:bg-gray-100'} 
                 ${isCollapsed ? 'justify-center' : ''}`}
               >
                 <House className="w-5 h-5" />
@@ -58,7 +58,7 @@ export default function Dashboard() {
               <button
                 onClick={() => setActiveItem('coming-soon')}
                 className={`w-full text-left flex items-center gap-3 p-2 rounded-lg 
-                ${activeItem === 'coming-soon' ? 'bg-orange-500 text-white font-semibold' : 'hover:bg-gray-100'} 
+                ${activeItem === 'coming-soon' ? 'bg-[#ff914d] text-white font-semibold' : 'hover:bg-gray-100'} 
                 ${isCollapsed ? 'justify-center' : ''}`}
               >
                 <Boxes className="w-5 h-5" />
@@ -69,7 +69,7 @@ export default function Dashboard() {
               <button
                 onClick={() => setActiveItem('scenarios')}
                 className={`w-full text-left flex items-center gap-3 p-2 rounded-lg 
-                ${activeItem === 'scenarios' ? 'bg-orange-500 text-white font-semibold' : 'hover:bg-gray-100'} 
+                ${activeItem === 'scenarios' ? 'bg-[#ff914d] text-white font-semibold' : 'hover:bg-gray-100'} 
                 ${isCollapsed ? 'justify-center' : ''}`}
               >
                 <MessageSquare className="w-5 h-5" />

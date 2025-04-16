@@ -12,9 +12,25 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
 
-  const { messages } = await req.json();
+  const { messages: initialMessages, scenarioId } = await req.json();
 
-  //HERE INPLEMENT tHE ROLE BASED PROMPTS FOR NOW
+  let messages = initialMessages;
+
+  if (!messages || messages.length === 0) {
+    const STARTERS: Record<string, string> = {
+      placeholder1: "I am a test",
+      placeholder2: "I am a test 2",
+    };
+
+    const prompt = STARTERS[scenarioId] || STARTERS.default;
+
+    messages = [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ];
+  }
 
   const result = streamText({
     model: groq('llama-3.1-8b-instant'),
