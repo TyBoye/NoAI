@@ -2,13 +2,14 @@
 import Chat from '@/components/chatbot';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeftToLine, ArrowRightToLine, House, Boxes, MessageSquare} from 'lucide-react';
+import { ArrowLeftToLine, ArrowRightToLine, House, Boxes, MessageSquare } from 'lucide-react';
 import Logo from '@/app/assets/NoAI.svg';
 import { useState } from 'react';
 import { UserButton, useUser } from "@clerk/nextjs";
 
 export default function Dashboard() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [activeItem, setActiveItem] = useState('dashboard');
 
   const { isSignedIn, user, isLoaded } = useUser();
 
@@ -21,21 +22,21 @@ export default function Dashboard() {
 
   return (
     <div className="flex">
-    {/* Thy Sidebar */}
-    <aside className={`h-screen transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
+      {/* Thy Sidebar */}
+      <aside className={`h-screen transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
         <nav className="h-full flex flex-col bg-white border-r">
           <div className="p-4 pb-2 flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <Image src={Logo} alt="logo" width={32} height={32} className="w-8 h-8"/>
+              <Image src={Logo} alt="logo" width={32} height={32} className="w-8 h-8" />
               {!isCollapsed && <Link href="/" className="text-xl font-bold">Negotiation.AI</Link>}
             </div>
-            <button 
-              className="p-1.5 rounded-lg hover:bg-gray-100" 
+            <button
+              className="p-1.5 rounded-lg hover:bg-gray-100"
               onClick={toggleSidebar}
             >
-              {isCollapsed ? 
-                <ArrowRightToLine className="w-5 h-5"/> : 
-                <ArrowLeftToLine className="w-5 h-5"/>
+              {isCollapsed ?
+                <ArrowRightToLine className="w-5 h-5" /> :
+                <ArrowLeftToLine className="w-5 h-5" />
               }
             </button>
           </div>
@@ -43,22 +44,37 @@ export default function Dashboard() {
           {/* Still unsure about links, will need to be expanded on */}
           <ul className="space-y-2 px-3 mt-4">
             <li>
-              <Link href="/dashboard" className={`flex items-center gap-3 p-2 rounded-lg hover:bg-orange-400 ${isCollapsed ? 'justify-center' : ''}`}>
+              <button
+                onClick={() => setActiveItem('dashboard')}
+                className={`w-full text-left flex items-center gap-3 p-2 rounded-lg 
+                ${activeItem === 'dashboard' ? 'bg-orange-500 text-white font-semibold' : 'hover:bg-gray-100'} 
+                ${isCollapsed ? 'justify-center' : ''}`}
+              >
                 <House className="w-5 h-5" />
                 {!isCollapsed && <span>Dashboard</span>}
-              </Link>
+              </button>
             </li>
             <li>
-              <Link href="/dashboard" className={`flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 ${isCollapsed ? 'justify-center' : ''}`}>
+              <button
+                onClick={() => setActiveItem('coming-soon')}
+                className={`w-full text-left flex items-center gap-3 p-2 rounded-lg 
+                ${activeItem === 'coming-soon' ? 'bg-orange-500 text-white font-semibold' : 'hover:bg-gray-100'} 
+                ${isCollapsed ? 'justify-center' : ''}`}
+              >
                 <Boxes className="w-5 h-5" />
-                {!isCollapsed && <span>Coming Soon</span>}{/* Should we even do analytics right now? Like I dont think we have time now. */}
-              </Link>
+                {!isCollapsed && <span>Coming Soon</span>}
+              </button>
             </li>
             <li>
-              <Link href="/dashboard" className={`flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 ${isCollapsed ? 'justify-center' : ''}`}>
+              <button
+                onClick={() => setActiveItem('scenarios')}
+                className={`w-full text-left flex items-center gap-3 p-2 rounded-lg 
+                ${activeItem === 'scenarios' ? 'bg-orange-500 text-white font-semibold' : 'hover:bg-gray-100'} 
+                ${isCollapsed ? 'justify-center' : ''}`}
+              >
                 <MessageSquare className="w-5 h-5" />
-                {!isCollapsed && <span>Senarios</span>}{/* I think this will be the senarios section, so this will be a dropdown menu */}
-              </Link>
+                {!isCollapsed && <span>Senarios</span>}
+              </button>
             </li>
           </ul>
 
@@ -68,10 +84,9 @@ export default function Dashboard() {
             <div className="mt-6 px-3 flex-1 overflow-hidden flex flex-col">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="px-2 text-sm font-semibold text-gray-500">RECENT CHATS</h3>
-                </div>
+              </div>
             </div>
           )}
-          
 
           {/* This is the User Profile Section 
           Below you can see that the user can see their first and last name, and "Manage their account" Thats only true
@@ -79,7 +94,7 @@ export default function Dashboard() {
           issue out, please let me know.*/}
           <div className="mt-auto border-t p-4">
             <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
-              <UserButton afterSignOutUrl="/"/>
+              <UserButton afterSignOutUrl="/" />
               {!isCollapsed && (
                 <div className="flex flex-col">
                   <span className="font-medium">{user?.firstName} {user?.lastName}</span>
@@ -97,14 +112,13 @@ export default function Dashboard() {
           <h1 className="text-3xl font-bold text-gray-900 mb-8">
             Welcome to Your Dashboard, {user?.firstName}
           </h1>
-          
-      
+
           <div className="bg-white rounded-lg shadow-sm p-6">
             <div className="h-full flex flex-col">
               <div className="flex-1 overflow-y-auto mb-4">
               </div>
               <div className="border-t pt-4">
-                 {/* the chat bot will need a bit of a rework to make sure that it does 
+                {/* the chat bot will need a bit of a rework to make sure that it does 
                  not overflow the page and does no look silly*/}
                 <Chat />
               </div>
@@ -114,5 +128,4 @@ export default function Dashboard() {
       </main>
     </div>
   );
-} 
-
+}

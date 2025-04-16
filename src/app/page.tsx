@@ -26,7 +26,7 @@ export default function Home() {
           <div className="flex justify-center gap-4">
             <SignedOut>
               <SignInButton mode="modal">
-                <Button className="bg-[#ff914d] text-white" 
+                <Button className="bg-[#ff914d] text-white hover:cursor-pointer" 
                 variant='outline' 
                 size='lg'>
                   Start Practicing Today
@@ -35,7 +35,7 @@ export default function Home() {
             </SignedOut>
             <SignedIn>
               <Link href="/dashboard">
-                <Button className="bg-[#ff914d] text-white" 
+                <Button className="bg-[#ff914d] text-white hover:cursor-pointer" 
                 variant='outline' 
                 size='lg'>
                   Start Practicing Today
