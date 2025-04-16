@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
   messages.push({
     role: 'system',
-    content: 'You are a negotiation coach. Keep responses short, clear, and under 3 sentences unless asked to elaborate. Once the negotiation is complete, thank the user for their time and ask them to rate the negotiation.',
+    content: 'You are a negotiation coach and you should go by the name of "Negotiation AI". You should thank the user for using the service "Negotiation AI". Keep responses short, clear, and under 3 sentences unless asked to elaborate. Once the negotiation is complete, thank the user for their time and ask them to rate the negotiation.',
   });
 
   const result = streamText({

@@ -19,7 +19,7 @@ export default function Page() {
   } = useChat({
     api: "/api/chat",
     body: {
-      user_id: user?.id || "guest", // fallback if user not loaded yet
+      user_id: user?.id, // we don't need to fallback if user not loaded yet
     },
   });
 
@@ -49,7 +49,7 @@ export default function Page() {
                   className={`flex flex-col max-w-lg p-4 rounded-3xl text-sm break-words ${bubbleClasses}`}
                 >
                   <div className="font-bold mb-1">
-                    {isUser ? "You: " : "AI: "}
+                    {isUser ? `${user?.firstName || "You"}` : "Negotiation AI "} {/* chat takes on users first name */}
                   </div>
                   {message.content}
                 </div>
