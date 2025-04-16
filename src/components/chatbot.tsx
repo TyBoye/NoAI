@@ -91,9 +91,8 @@ export default function Page() {
           </>
         )}
       </div>
-
       <form onSubmit={handleSubmit}>
-        <span className="flex col-2 gap-3 mt-4">
+        <div className="flex col-2 gap-3 mt-4">
           <textarea
             name="prompt"
             value={input}
@@ -106,18 +105,18 @@ export default function Page() {
               }
             }}
             disabled={status !== "ready"}
-            className="w-full px-2 rounded-md border border-gray-300 resize-none"
-            rows={2}
+            className="flex-1 min-h-7 max-h-60 px-3 py-2 rounded-md resize-none outline-none ring-2 ring-[#ff914d] border-transparent"
+            rows={1}
             placeholder="Type your message..."
           />
           <button
             type="submit"
-            className="bg-[#ff914d] text-white px-4 py-1 rounded-lg hover:bg-white hover:text-orange-400 border shadow-md border-orange-500 transition-colors duration-300"
+            className="bg-[#ff914d] text-white px-2 py-1 rounded-lg hover:bg-white hover:text-orange-400 border shadow-md border-orange-500 transition-colors duration-300 h-[40px] self-end"
             disabled={status !== "ready"}
           >
             Submit
           </button>
-        </span>
+        </div>
       </form>
     </>
   );
