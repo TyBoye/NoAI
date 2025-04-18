@@ -3,33 +3,43 @@
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
+interface Scenario {
+    label: string;
+    value: string;
+    description: string;
+    prompt: string;
+}
+
 export default function Dropdown() {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedScenario, setSelectedScenario] = useState('Sales');
 
-    const scenarios = [
+    const scenarios: Scenario[] = [
         { 
             label: 'Sales', 
             value: 'sales',
-            description: 'Practice sales negotiation skills'
+            description: 'Practice sales negotiation skills',
+            prompt: 'You are playing the role of a sales person',
         },
         { 
             label: 'Salary', 
             value: 'salary',
-            description: 'Practice negotiating your salary'
+            description: 'Practice negotiating your salary',
+            prompt: 'You are playing the role of an employee negotiating a salary increase. '
         },
         { 
             label: 'Contract', 
             value: 'contract',
-            description: 'Practice negotiating a contract'
+            description: 'Practice negotiating a contract',
+            prompt: 'You are playing the role of a business partner negotiating contract terms.'
         },
     ];
     
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-
-    const handleSelect = (scenario: { label: string; value: string }) => {
+    // STOPPING HERE YOU STILL NEED TO ADD TO SIDE BAR AND LINK BACK TO CHAT
+    const handleSelect = (scenario: Scenario) => {
         setSelectedScenario(scenario.label);
         setIsOpen(false);
     };
