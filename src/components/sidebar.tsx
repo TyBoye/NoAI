@@ -68,14 +68,14 @@ export default function Sidebar() {
             </li>
             <li>
             
-              <button
+              <div
                 onClick={() => setActiveItem('scenarios')}
                 className={`w-full text-left flex items-center gap-4 p-2 rounded-lg  
                 ${isCollapsed ? 'justify-center' : ''}`}
               >
                 <MessageSquare className="w-5 h-5" />
                 {!isCollapsed && <Dropdown />}
-              </button>
+              </div>
             </li>
           </ul>
 
