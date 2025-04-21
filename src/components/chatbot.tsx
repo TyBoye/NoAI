@@ -3,7 +3,6 @@ import { useChat } from "@ai-sdk/react";
 import { Loader2 } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
-
 export default function Page() {
   const { user } = useUser();
 

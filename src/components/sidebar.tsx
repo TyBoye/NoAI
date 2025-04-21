@@ -3,25 +3,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeftToLine, ArrowRightToLine, House, Boxes, MessageSquare } from 'lucide-react';
 import Logo from '@/app/assets/NoAI.svg';
-import { useState } from 'react';
-import { UserButton, useUser, useClerk } from "@clerk/nextjs";
+import { useState} from 'react';
+import { UserButton, useUser, useClerk } from '@clerk/nextjs';
 import Dropdown from './ui/dropdown';
+
 
 export default function Sidebar() {
 
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [activeItem, setActiveItem] = useState('dashboard');
+    const { user } = useUser();
     const { openUserProfile } = useClerk();
-    const { isSignedIn, user, isLoaded } = useUser();
+
+   
 
     const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
     };
-
-    if (!isLoaded) return <div>Loading...</div>;
-    if (!isSignedIn) return <div>Sign in to view this page</div>;
-
-
 
     return (
     <aside className={`h-screen transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
