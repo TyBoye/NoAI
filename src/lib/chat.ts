@@ -6,12 +6,12 @@ export async function getOrCreateUser(
   name?: string,
   email?: string
 ) {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("users")
     .select("id")
     .eq("clerk_user_id", clerkUserId)
     .single();
-
+  
   if (data) return data.id;
 
   const { data: newUser, error: insertError } = await supabase
@@ -29,7 +29,7 @@ export async function getOrCreateConversation(
   userId: string,
   title = "Untitled Conversation"
 ) {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("conversations")
     .select("id")
     .eq("user_id", userId)
