@@ -8,7 +8,6 @@ interface Scenario {
     label: string;
     value: string;
     description: string;
-    prompt: string;
 }
 
 export default function Dropdown() {
@@ -20,19 +19,16 @@ export default function Dropdown() {
             label: 'Sales', 
             value: 'sales',
             description: 'Practice sales negotiation skills',
-            prompt: 'You are playing the role of a sales person',
         },
         { 
             label: 'Salary', 
             value: 'salary',
             description: 'Practice negotiating your salary',
-            prompt: 'You are playing the role of an employee negotiating a salary increase. '
         },
         { 
             label: 'Contract', 
             value: 'contract',
             description: 'Practice negotiating a contract',
-            prompt: 'You are playing the role of a business partner negotiating contract terms.'
         },
     ];
     

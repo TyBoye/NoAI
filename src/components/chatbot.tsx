@@ -24,6 +24,7 @@ export default function Page() {
     },
   });
 
+  
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   // Auto-scroll to the last message when messages change
