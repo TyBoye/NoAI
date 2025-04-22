@@ -6,8 +6,6 @@ const groq = createGroq({
   baseURL: 'https://api.groq.com/openai/v1',
 });
 
-
-
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
@@ -18,8 +16,9 @@ export async function POST(req: Request) {
 
   if (!messages || messages.length === 0) {
     const STARTERS: Record<string, string> = {
-      placeholder1: "I am a test",
-      placeholder2: "I am a test 2",
+      Sales: "I am a test",
+      Salary: "I am a test 2",
+      Contract: "I am a test 3",
     };
 
     const prompt = STARTERS[scenarioId] || STARTERS.default;

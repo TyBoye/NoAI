@@ -1,8 +1,10 @@
 "use client";
 import { useChat } from "@ai-sdk/react";
 import { Loader2 } from "lucide-react";
+//import { supabase } from "@/lib/supabase";
 import { useRef, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
+import { ArrowRight } from "lucide-react";
 export default function Page() {
   const { user } = useUser();
 
@@ -29,10 +31,16 @@ export default function Page() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  //const chatHistory = async () => {
+    //const { data, error } = await supabase
+  //}
+
+
   return (
     <>
       <div className="flex flex-col h-96">
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
+
           {messages.map((message) => {
             const isUser = message.role === "user"; // Check if the message is from the user
 
@@ -60,14 +68,15 @@ export default function Page() {
           and the text is hard to read. Need to figure out a way to fix this */}
         </div>
 
-        <div className="flex justify-end p-2">
+        <div className="flex justify-end p-1">
           {(status === "submitted" || status === "streaming") && (
             <div className="flex items-center gap-2">
               {status === "submitted" && (
-                <Loader2 className="animate-spin w-4 h-4" />
+                <Loader2 className="animate-spin w-3 h-4" />
               )}
               <button
-                className="bg-[#ff914d] text-white px-4 py-2 rounded-md hover:bg-orange-400 shadow-md"
+
+                className="font-light text-gray-400 text-sm py-1 px-1 rounded-sm hover:bg-gray-600 shadow-md"
                 type="button"
                 onClick={() => stop()}
               >
@@ -113,7 +122,7 @@ export default function Page() {
             className="bg-[#ff914d] text-white px-2 py-1 rounded-lg hover:bg-white hover:text-orange-400 border shadow-md border-orange-500 transition-colors duration-300 h-[40px] self-end"
             disabled={status !== "ready"}
           >
-            Submit
+            <ArrowRight className="w-5 h-5" />
           </button>
         </div>
       </form>
