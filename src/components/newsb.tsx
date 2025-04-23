@@ -41,7 +41,7 @@ const Logo = () => (
         </g>
       </g>
     </svg>
-    <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">Negotiation AI</span>
+    <span className="font-bold text-lg text-gray-900 dark:text-gray-100">Negotiation.AI</span>
   </div>
 );
 
