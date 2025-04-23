@@ -1,75 +1,82 @@
 "use client";
 import { useChat } from "@ai-sdk/react";
-import { Loader2 } from "lucide-react";
-//import { supabase } from "@/lib/supabase";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
-import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+
 export default function Page() {
   const { user } = useUser();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const {
     messages,
     input,
     handleInputChange,
     handleSubmit,
-    error,
     reload,
     status,
     stop,
   } = useChat({
     api: "/api/chat",
     body: {
-      user_id: user?.id, // we don't need to fallback if user not loaded yet
-    },
+      user_id: user?.id,
+      data: {
+       
+    }, firstName: user?.firstName,
+        lastName: user?.lastName,
+      },
+    initialMessages: [
+      {
+        id: '1',
+        role: 'user',
+        content: 'Hey!',
+      }
+    ]
   });
 
-  
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-  // Auto-scroll to the last message when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  //const chatHistory = async () => {
-    //const { data, error } = await supabase
-  //}
-
+  useEffect(() => { //THIS SENDS THE MESSAGE OMGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+    
+    reload();
+  }, []);
 
   return (
-    <>
-      <div className="flex flex-col h-96">
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-
-          {messages.map((message) => {
-            const isUser = message.role === "user"; // Check if the message is from the user
-
-            const bubbleClasses = isUser
-              ? "bg-[#ff914d] text-white"
-              : "bg-[#c8a47b] text-black";
-
-            const alignment = isUser ? "justify-end" : "justify-start";
-
-            return (
-              <div key={message.id} className={`flex ${alignment}`}>
-                <div
-                  className={`flex flex-col max-w-lg p-4 rounded-3xl text-sm break-words ${bubbleClasses}`}
-                >
-                  <div className="font-bold mb-1">
-                    {isUser ? `${user?.firstName || "You"}` : "Negotiation AI "} {/* chat takes on users first name */}
-                  </div>
-                  {message.content}
+    <div className="flex flex-col h-full">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.filter((_, index) => index !== 0).map((message) => {
+          const isUser = message.role === "user";
+          return (
+            <div key={message.id} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+              <div
+                className={cn(
+                  "flex flex-col max-w-lg p-4 rounded-3xl text-sm break-words",
+                  isUser ? "bg-[#ff914d] text-white" : "bg-[#c8a47b] text-black"
+                )}
+              >
+                <div className="font-bold mb-1">
+                  {isUser ? `${user?.firstName || "You"}` : "Negotiation AI"}
                 </div>
+                {message.content}
               </div>
-            );
-          })}
-          <div ref={messagesEndRef} />
-          {/* This button will stop the chatbot from generating but the only issue is that the button is hard to click
-          and the text is hard to read. Need to figure out a way to fix this */}
-        </div>
+            </div>
+          );
+        })}
+        {status === "submitted" && (
+          <div className="flex items-start gap-3 justify-start">
+            <div className="bg-muted rounded-lg p-3 text-sm animate-pulse">
+              Cooking...
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
+      </div>
 
-        <div className="flex justify-end p-1">
+      <div className="flex justify-end p-1">
           {(status === "submitted" || status === "streaming") && (
             <div className="flex items-center gap-2">
               {status === "submitted" && (
@@ -84,22 +91,9 @@ export default function Page() {
                 Stop
               </button>
             </div>
-          )}
-        </div>
-
-        {error && (
-          <>
-            <div className="p-4 text-red-600">An error occurred.</div>
-            <button
-              type="button"
-              onClick={() => reload()}
-              className="underline text-sm mt-1"
-            >
-              Retry
-            </button>
-          </>
         )}
       </div>
+
       <form onSubmit={handleSubmit}>
         <div className="flex col-2 gap-3 mt-4">
           <textarea
@@ -127,6 +121,6 @@ export default function Page() {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 }

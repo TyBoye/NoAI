@@ -5,7 +5,7 @@ import { ArrowLeftToLine, ArrowRightToLine, House, Boxes, MessageSquare } from '
 import Logo from '@/app/assets/NoAI.svg';
 import { useState} from 'react';
 import { UserButton, useUser, useClerk } from '@clerk/nextjs';
-import Dropdown from './ui/dropdown';
+import Dropdown from '@/archieve/dropdown';
 
 
 export default function Sidebar() {
