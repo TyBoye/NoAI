@@ -5,7 +5,6 @@ import { useRef, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
-
 export default function Page() {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -22,50 +21,59 @@ export default function Page() {
     api: "/api/chat",
     body: {
       user_id: user?.id,
-      data: {
-       
-    }, firstName: user?.firstName,
-        lastName: user?.lastName,
-      },
+      data: {},
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+    },
     initialMessages: [
       {
-        id: '1',
-        role: 'user',
-        content: 'Hey!',
-      }
-    ]
+        id: "1",
+        role: "user",
+        content: "Hey!",
+      },
+    ],
   });
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() => { //THIS SENDS THE MESSAGE OMGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-    
+  useEffect(() => {
+    //THIS SENDS THE MESSAGE OMGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+
     reload();
   }, []);
 
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.filter((_, index) => index !== 0).map((message) => {
-          const isUser = message.role === "user";
-          return (
-            <div key={message.id} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+        {messages
+          .filter((_, index) => index !== 0)
+          .map((message) => {
+            const isUser = message.role === "user";
+            return (
               <div
-                className={cn(
-                  "flex flex-col max-w-lg p-4 rounded-3xl text-sm break-words",
-                  isUser ? "bg-[#ff914d] text-white" : "bg-[#c8a47b] text-black"
-                )}
+                key={message.id}
+                className={`flex flex-col ${
+                  isUser ? "items-end" : "items-start"
+                }`}
               >
-                <div className="font-bold mb-1">
+                <div className="text-xs text-black/35 font-semibold mb-1 px-2">
                   {isUser ? `${user?.firstName || "You"}` : "Negotiation AI"}
                 </div>
-                {message.content}
+                <div
+                  className={cn(
+                    "flex max-w-lg p-4 rounded-3xl text-sm break-words",
+                    isUser
+                      ? "bg-white text-black drop-shadow-lg"
+                      : "bg-[#ff914d] text-white"
+                  )}
+                >
+                  {message.content}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
         {status === "submitted" && (
           <div className="flex items-start gap-3 justify-start">
             <div className="bg-muted rounded-lg p-3 text-sm animate-pulse">
@@ -77,20 +85,19 @@ export default function Page() {
       </div>
 
       <div className="flex justify-end p-1">
-          {(status === "submitted" || status === "streaming") && (
-            <div className="flex items-center gap-2">
-              {status === "submitted" && (
-                <Loader2 className="animate-spin w-3 h-4" />
-              )}
-              <button
-
-                className="font-light text-gray-400 text-sm py-1 px-1 rounded-sm hover:bg-gray-600 shadow-md"
-                type="button"
-                onClick={() => stop()}
-              >
-                Stop
-              </button>
-            </div>
+        {(status === "submitted" || status === "streaming") && (
+          <div className="flex items-center gap-2">
+            {status === "submitted" && (
+              <Loader2 className="animate-spin w-3 h-4" />
+            )}
+            <button
+              className="font-light text-gray-400 text-sm py-1 px-1 rounded-sm hover:bg-gray-600 shadow-md"
+              type="button"
+              onClick={() => stop()}
+            >
+              Stop
+            </button>
+          </div>
         )}
       </div>
 
