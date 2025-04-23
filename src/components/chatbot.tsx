@@ -59,7 +59,7 @@ export default function Page() {
                 }`}
               >
                 <div className="text-xs text-black/35 font-semibold mb-1 px-2">
-                  {isUser ? `${user?.firstName || "You"}` : "Negotiation AI"}
+                  {isUser ? `${user?.firstName || "You"}` : "Neon"}
                 </div>
                 <div
                   className={cn(
