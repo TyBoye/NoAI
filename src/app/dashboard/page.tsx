@@ -17,7 +17,7 @@ export default function Dashboard() {
       <main className="flex-1 overflow-auto">
         <div className="max-w-5xl mx-auto p-4">
           <h1 className="text-3xl font-bold mb-4">
-            Hey {user?.firstName}, Let's negotiate!
+            Hey {user?.firstName}, Let&apos;s negotiate!
           </h1>
           <div className="flex flex-col h-[calc(100vh-12rem)]">
             <div className="flex-1 overflow-y-auto">
