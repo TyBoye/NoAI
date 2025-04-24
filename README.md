@@ -81,4 +81,4 @@ Negotiation AI is perfect for learning and practicing how to negotiate:
 
 To run Negotiation AI, follow these steps.
 
-Then open [no-ai.vercel.app](https://no-ai.vercel.app/) in your browser.
+Open [no-ai.vercel.app](https://no-ai.vercel.app/) in your browser.
