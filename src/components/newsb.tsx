@@ -52,7 +52,7 @@ const Logo = () => (
       </g>
     </svg>
     <span className="font-bold text-lg text-gray-900 dark:text-gray-100">
-      Neon AI
+      Negotiation.AI
     </span>
   </div>
 );

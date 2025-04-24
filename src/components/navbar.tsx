@@ -24,7 +24,7 @@ export default function Navbar() {
               className="w-8 h-8"
             />
             <Link href="/" className="font-bold text-lg">
-              Neon AI
+              Negotiation.AI
             </Link>
           </div>
 

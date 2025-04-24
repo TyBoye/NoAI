@@ -18,7 +18,7 @@ export default function Footer() {
                 className="w-8 h-8"
               />
               <Link href="/" className="font-semibold text-md">
-                Neon AI
+                Negotiation.AI
               </Link>
             </div>
           </div>
