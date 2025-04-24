@@ -17,7 +17,7 @@ export default function Dashboard() {
       <main className="flex-1 overflow-auto">
         <div className="max-w-5xl mx-auto p-4">
           <h1 className="text-3xl font-bold mb-4">
-            Hey <span className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 bg-clip-text text-transparent">{user?.firstName} </span>, Let&apos;s negotiate!
+            Hey <span className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-400 bg-clip-text text-transparent">{user?.firstName} </span>, Let&apos;s Negotiate!
           </h1>
           <div className="flex flex-col h-[calc(100vh-12rem)]">
             <div className="flex-1 overflow-y-auto">
