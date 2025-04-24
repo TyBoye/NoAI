@@ -23,7 +23,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="opacity-70 text-md flex justify-center">
-            Neon AI. &copy; {currentYear} All Rights Reserved.
+            Negotiation AI. &copy; {currentYear} All Rights Reserved.
           </p>
           <span className="font-sm flex justify-center gap-2 ">
             <Link href="#">Privacy Policy</Link>|<Link href="#"> Terms</Link>
