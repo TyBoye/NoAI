@@ -58,7 +58,7 @@ export default function Page() {
                   isUser ? "items-end" : "items-start"
                 }`}
               >
-                <div className="text-xs text-black/35 font-semibold mb-1 px-2">
+                <div className="text-sm text-black/35 font-semibold mb-1 px-2">
                   {isUser ? `${user?.firstName || "You"}` : "Neon"}
                 </div>
                 <div
