@@ -86,7 +86,7 @@ export default function Home() {
                   Realistic Scenarios
                 </CardHeader>
                 <CardDescription className="flex justify-center text-md">
-                  Practice in a variety of real-world situations. Weather its a
+                  Practice in a variety of real-world situations. Whether its a
                   business deal or salary negotiation
                 </CardDescription>
               </Card>
