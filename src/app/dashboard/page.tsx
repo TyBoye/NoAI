@@ -2,11 +2,17 @@
 import Chat from "@/components/chatbot";
 import { useUser } from "@clerk/nextjs";
 import { AppSidebar } from "@/components/newsb";
+import Image from "next/image";
+
+
 
 export default function Dashboard() {
   const { isSignedIn, user, isLoaded } = useUser();
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <div>
+    <div className="flex justify-center items-center h-screen w-full animate-spin"><Image src="/NoAI.svg" alt="NoAI Logo" width={128} height={128} />
+    </div>
+    </div>
   if (!isSignedIn) return <div>Sign in to view this page</div>;
 
   return (
@@ -26,9 +32,10 @@ export default function Dashboard() {
             <Chat />
           </div>
 
-          <div className="flex justify-center items-center mt-4 text-sm text-gray-500">
-            AI Insights, not legal advice. Check&nbsp;
-            <span className="underline text-orange-300">Terms</span>.
+          <div className="flex justify-center items-center mt-4 text-sm text-gray-500 gap-1">
+            <Image src="/NoAI.svg" alt="NoAI Logo" width={16} height={16} />
+             AI Insights, not legal advice. Check
+             <span className="underline text-orange-300">Terms</span>.
           </div>
         </div>
       </main>

@@ -1,9 +1,11 @@
 "use client";
 import { useChat } from "@ai-sdk/react";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+
 
 export default function Page() {
   const { user } = useUser();
@@ -21,9 +23,10 @@ export default function Page() {
     api: "/api/chat",
     body: {
       user_id: user?.id,
-      data: {},
-      firstName: user?.firstName,
-      lastName: user?.lastName,
+      data: {
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+      },
     },
     initialMessages: [
       {
@@ -76,7 +79,7 @@ export default function Page() {
           })}
         {status === "submitted" && (
           <div className="flex items-start gap-3 justify-start">
-            <div className="bg-muted rounded-lg p-3 text-sm animate-pulse">
+            <div className="bg-muted bg-gradient-to-r from-[#ff914d] via-[#ff5e62] to-[#ff3c38] bg-clip-text text-transparent rounded-lg p-3 text-sm animate-pulse">
               Cooking...
             </div>
           </div>
@@ -86,12 +89,12 @@ export default function Page() {
 
       <div className="flex justify-end p-1">
         {(status === "submitted" || status === "streaming") && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {status === "submitted" && (
-              <Loader2 className="animate-spin w-3 h-4" />
+              <Image className="animate-spin" src="/NoAI.svg" alt="NoAI Logo" width={16} height={16} />
             )}
             <button
-              className="font-light text-gray-400 text-sm py-1 px-1 rounded-sm hover:bg-gray-600 shadow-md"
+              className="bg-muted font-light bg-gradient-to-r from-[#ff914d] via-[#ff5e62] to-[#ff3c38] bg-clip-text text-transparent text-sm py-1 px-1 rounded-sm hover:bg-gray-600 shadow-md animate-pulse"
               type="button"
               onClick={() => stop()}
             >
@@ -124,7 +127,7 @@ export default function Page() {
             className="bg-[#ff914d] text-white px-2 py-1 rounded-lg hover:bg-white hover:text-orange-400 border shadow-md border-orange-500 transition-colors duration-300 h-[40px] self-end"
             disabled={status !== "ready"}
           >
-            <ArrowRight className="w-5 h-5" />
+            <ArrowUp className="w-5 h-5" />
           </button>
         </div>
       </form>
