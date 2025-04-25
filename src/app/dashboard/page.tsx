@@ -3,6 +3,7 @@ import Chat from "@/components/chatbot";
 import { useUser } from "@clerk/nextjs";
 import { AppSidebar } from "@/components/newsb";
 import Image from "next/image";
+import Link from "next/link";
 
 
 
@@ -35,7 +36,9 @@ export default function Dashboard() {
           <div className="flex justify-center items-center mt-4 text-sm text-gray-500 gap-1">
             <Image src="/NoAI.svg" alt="NoAI Logo" width={16} height={16} />
              AI Insights, not legal advice. Check
-             <span className="underline text-orange-300">Terms</span>.
+             <Link href="/terms">
+             <span className="underline text-orange-300">Terms</span>
+             </Link>
           </div>
         </div>
       </main>

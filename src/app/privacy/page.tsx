@@ -1,27 +1,18 @@
-import Link from "next/link";
-import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { BrainCog, Zap, Building2 } from "lucide-react";
-import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Privacy() {
     return (
-        <main className="max-w-3xl mx-auto px-4 py-10 text-gray-800">
+        <div className="min-h-screen">
+        <Navbar />
+        <div className="max-w-3xl mx-auto p-24 text-gray-800">
             <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
             <p className="text-sm text-gray-500 mb-8">
-                Effective Date: [Insert Date] <br />
-                Last Updated: [Insert Date]
+                Effective Date: 4/25/25 <br />
+                Last Updated: 4/25/25
             </p>
             <p className="mb-6">
-                Negotiation.AI ("we", "our", or "us") values your privacy. This Privacy
+                Negotiation.AI (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) values your privacy. This Privacy
                 Policy explains how we collect, use, and protect your information. By
                 using our services, you agree to this policy.
             </p>
@@ -112,15 +103,8 @@ export default function Privacy() {
                     </a>
                 </p>
             </section>
-        </main>
-    );
-}
-
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
-    return (
-        <section id={id}>
-            <h2>{title}</h2>
-            {children}
-        </section>
+        </div>
+        <Footer />
+        </div>
     );
 }

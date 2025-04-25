@@ -26,7 +26,7 @@ export default function Footer() {
             Negotiation AI. &copy; {currentYear} All Rights Reserved.
           </p>
           <span className="font-sm flex justify-center gap-2 ">
-            <Link href="#">Privacy Policy</Link>|<Link href="#"> Terms</Link>
+            <Link href="/privacy">Privacy Policy</Link>|<Link href="/terms"> Terms</Link>
           </span>
         </div>
       </footer>

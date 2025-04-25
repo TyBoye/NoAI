@@ -1,22 +1,16 @@
 import Link from "next/link";
-import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { BrainCog, Zap, Building2 } from "lucide-react";
-import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+
+
 
 export default function Terms() {
     return (
-        <main className="max-w-3xl mx-auto px-4 py-10 text-gray-800">
+        <div className="min-h-screen">
+        <Navbar/>
+        <main className="max-w-3xl mx-auto p-24 text-gray-800">
             <h1 className="text-3xl font-bold mb-2">Terms of Service</h1>
-            <p className="text-sm text-gray-500 mb-8">Last Updated: [Insert Date]</p>
+            <p className="text-sm text-gray-500 mb-8">Last Updated: 4/25/25</p>
   
         <p className="mb-6">
           Please read these Terms of Service carefully before using the Negotiation.AI service operated by Bit by Bit.
@@ -33,9 +27,9 @@ export default function Terms() {
             <h2 className="text-xl font-semibold mb-2">2. Privacy Policy</h2>
             <p>
             Before continuing to use our site, please review our{" "}
-                <a href="/privacy" className="text-blue-600 underline">
+                <Link href="/privacy" className="text-blue-600 underline">
                 Privacy Policy
-                </a>{" "}
+                </Link>{" "}
                 to understand how we collect, use, and protect your personal data.
             </p>
         </section>
@@ -108,5 +102,7 @@ export default function Terms() {
             </p>
         </section>
       </main>
+      <Footer />
+      </div>
     );
 }
