@@ -5,6 +5,8 @@ import Footer from "@/components/footer";
 
 
 export default function Terms() {
+
+    
     return (
         <div className="min-h-screen">
         <Navbar/>

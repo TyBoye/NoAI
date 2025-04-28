@@ -14,6 +14,12 @@ import Chat from "@/app/assets/test3.svg";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
+
+
+
+  
+
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -161,6 +167,11 @@ export default function Home() {
           </Button>
         </div>
       </section>
+      {/* FAQ */}
+      <section>
+
+      </section>
+
       {/* Footer Section */}
       <Footer />
     </div>
