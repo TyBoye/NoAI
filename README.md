@@ -72,9 +72,10 @@ Negotiation AI is perfect for learning and practicing how to negotiate:
 ## Tech Stack
 
 - **Frontend:** TypeScript, Next.js, Tailwind CSS, Shadcn/UI  
-- **Backend:** Node.js, Express, PostgresSQL
-- **AI:** Groq API 
-- **Others:** Postman, Zod, Vercel (deployment)
+- **Backend:** Node.js, Express, PostgresSQL, Supabase
+- **AI:** Groq API, AI SDK
+- **Authentication:** Clerk
+- **Deployment:** Vercel 
 
 
 ## Getting Started
