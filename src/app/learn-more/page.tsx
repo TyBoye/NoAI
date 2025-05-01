@@ -38,7 +38,7 @@ export default function AboutUs() {
             <br /><br />
             As much as <span className="text-orange-500">Neon</span> likes to chat with people, it is very focused on helping you improve, and even
             enjoys it! It will make sure that all chats are about negotiation practice, and will make sure you
-            stay on topic and not get sidetracked. Isn’t it awesome!?
+            stay on topic and not get sidetracked. Isn&apos;t it awesome!?
           </p>
         </section>
 
@@ -48,7 +48,7 @@ export default function AboutUs() {
             We are <span className="text-orange-500">Negotiation AI</span>! We are a group of Undergraduate students who all
             feel that negotiation is a skill that many people must gain. Every one of us have gone through
             situations where our negotiation tactics have failed, causing us to miss out on so many
-            opportunities. After that, we all noticed that there isn’t really much one-on-one support when it
+            opportunities. After that, we all noticed that there isn&apos;t really much one-on-one support when it
             comes to practicing negotiation skills (other than online tutorials), so we decided to change that
             by making something that could allow 24/7 support, and will be there to help you with all your
             negotiation needs; A CHATBOT! Through this idea, we decided to create <span className="text-orange-500">Neon</span> with the vision of
