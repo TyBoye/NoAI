@@ -16,9 +16,9 @@ export default function AboutUs() {
             Welcome to <span className="text-orange-500">Negotiation.AI</span>! We built <span className="text-orange-500">Negotiation.AI</span> with one goal in mind: to make practicing
             negotiation skills easy, effective, and accessible to everyone.
             <br /><br />
-            Negotiation is a skill that takes practice, and that’s where we come in. <span className="text-orange-500">Negotiation.AI</span> offers an
+            Negotiation is a skill that takes practice, and that&apos;s where we come in. <span className="text-orange-500">Negotiation.AI</span> offers an
             interactive chatbot, named <span className="text-orange-500">Neon</span>, designed to simulate real-life negotiation scenarios. Whether
-            you're a student preparing for business school, a professional refining your persuasion tactics,
+            you&apos;re a student preparing for business school, a professional refining your persuasion tactics,
             or just someone who wants to boost their confidence, <span className="text-orange-500">Negotiation.AI</span> helps you build the skills to
             succeed.
             <br /><br />
@@ -29,7 +29,7 @@ export default function AboutUs() {
         </section>
 
         <section className="flex flex-col items-center text-center w-full max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl text-orange-500 mb-6">Who's Neon</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl text-orange-500 mb-6">Who&apos;s Neon</h1>
           <p className="max-w-xl text-gray-700">
             Now time to meet the star of the show, <span className="text-orange-500">Neon</span>! <span className="text-orange-500">Neon</span> will be your interactive AI chatbot and coach
             in your negotiation journey. <span className="text-orange-500">Neon</span> will begin by giving you a small introduction to the practice and
