@@ -8,11 +8,11 @@ export default function AboutUs() {
   return (
     <div className="bg-white text-black min-h-screen flex flex-col">
       <Navbar />
-
+      <div className="flex flex-col items-center justify-center text-center gap-8 p-12">
       <main className="flex-1 flex flex-col items-center justify-center text-center gap-8 p-6 pt-16">
         <section className="flex flex-col items-center text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl text-orange-500 mb-6">What is Negotiation AI</h1>
-          <p className="max-w-xl text-gray-700">
+          <h1 className="text-3xl md:text-4xl lg:text-7xl text-orange-500 mb-6">What is Negotiation AI</h1>
+          <p className="max-w-xl text-sm md:text-md lg:text-lg text-gray-700">
             Welcome to <span className="text-orange-500">Negotiation.AI</span>! We built <span className="text-orange-500">Negotiation.AI</span> with one goal in mind: to make practicing
             negotiation skills easy, effective, and accessible to everyone.
             <br /><br />
@@ -29,8 +29,8 @@ export default function AboutUs() {
         </section>
 
         <section className="flex flex-col items-center text-center w-full max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl text-orange-500 mb-6">Who&apos;s Neon</h1>
-          <p className="max-w-xl text-gray-700">
+          <h1 className="text-3xl md:text-4xl lg:text-7xl text-orange-500 mb-6">Who&apos;s Neon</h1>
+          <p className="max-w-xl text-sm md:text-md lg:text-lg text-gray-700">
             Now time to meet the star of the show, <span className="text-orange-500">Neon</span>! <span className="text-orange-500">Neon</span> will be your interactive AI chatbot and coach
             in your negotiation journey. <span className="text-orange-500">Neon</span> will begin by giving you a small introduction to the practice and
             then will ask what you want to negotiate about. From there, <span className="text-orange-500">Neon</span> will make sure to practice with
@@ -43,8 +43,8 @@ export default function AboutUs() {
         </section>
 
         <section className="flex flex-col items-center text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl text-orange-500 mb-6">About The Team</h1>
-          <p className="max-w-xl text-gray-700">
+          <h1 className="text-3xl md:text-4xl lg:text-7xl text-orange-500 mb-6">About The Team</h1>
+          <p className="max-w-xl text-sm md:text-md lg:text-lg text-gray-700">
             We are <span className="text-orange-500">Negotiation AI</span>! We are a group of Undergraduate students who all
             feel that negotiation is a skill that many people must gain. Every one of us have gone through
             situations where our negotiation tactics have failed, causing us to miss out on so many
@@ -56,6 +56,7 @@ export default function AboutUs() {
           </p>
         </section>
       </main>
+      </div>
 
       <Footer />
     </div>

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL('https://no-ai.vercel.app'),
-  title: "Negotiation.AI | Aboutus",
-  description: "Privacy Policy for Negotiation.AI",
+  title: "Negotiation.AI | About Us",
+  description: "About Us for Negotiation.AI",
   keywords: ['negotiation', 'ai', 'about', 'us', 'learn', 'more'],
   authors: [{name: 'NegotiationAI'}],
   creator: 'NegotiationAI',
