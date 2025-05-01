@@ -162,9 +162,11 @@ export default function Home() {
               </Link>
             </SignedIn>
           </div>
-          <Button className="mt-4 opacity-80" variant="default" size="lg">
-            Learn More
-          </Button>
+          <Link href="/learn-more">
+            <Button className="mt-4 opacity-80" variant="default" size="lg">
+              Learn More
+            </Button>
+          </Link>
         </div>
       </section>
       {/* FAQ */}
