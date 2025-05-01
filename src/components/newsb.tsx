@@ -12,7 +12,9 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
+import "@/app/globals.css";
 import { Plus } from "lucide-react";
+
 
 const Logo = () => (
   <div className="flex items-center gap-2">
@@ -61,6 +63,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useUser();
   const { openUserProfile } = useClerk();
 
+
+ 
+
   return (
     <>
       <SidebarProvider>
@@ -79,8 +84,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton className="bg-orange-100 mt-4 py-5 px-2 flex w-full justify-center">
-                  <span className="text-md font-semibold ">
+                <SidebarMenuButton 
+                  className="bg-orange-100 mt-4 py-5 px-2 flex w-full justify-center"
+                >
+                  <span className="text-md font-semibold">
                     New Negotiation
                   </span>
                   <Plus className="h-4 w-4" />

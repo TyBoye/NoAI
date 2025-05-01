@@ -69,7 +69,7 @@ export default function Page() {
                     "flex max-w-lg p-4 rounded-3xl text-sm break-words",
                     isUser
                       ? "bg-white text-black drop-shadow-lg"
-                      : "bg-[#ff914d] text-white"
+                      : "bg-[#ff914d] text-white drop-shadow-lg"
                   )}
                 >
                   {message.content}
