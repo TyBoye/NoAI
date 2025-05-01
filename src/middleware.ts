@@ -6,7 +6,8 @@ const isPublicRoute = createRouteMatcher([
   //DO NOT REMOVE THIS IS THE ONLY WAY USER HAS ACCESS TO LANDING LOL
   '/',
   '/privacy',
-  '/terms'
+  '/terms',
+  '/learn-more'
 ])
 
 export default clerkMiddleware(async (auth, req) => {
