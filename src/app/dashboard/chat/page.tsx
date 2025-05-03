@@ -37,7 +37,7 @@ export default function ChatPage() {
         const { messages } = await res.json();
   
         setInitialMessages(
-          messages.map((msg: any) => ({
+          messages.map((msg: { id: string; role: string; content: string; created_at: string }) => ({
             id: msg.id,
             role: msg.role === "ai" ? "assistant" : "user",
             content: msg.content,
@@ -56,7 +56,6 @@ export default function ChatPage() {
     input,
     handleInputChange,
     handleSubmit,
-    reload,
     stop,
     status,
   } = useChat({
