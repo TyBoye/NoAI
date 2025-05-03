@@ -7,8 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-// ✅ Animated Placeholder Component
-function AnimatedPlaceholder() {
+function AnimatedPlaceholder({ active }: { active: boolean }) {
   const suggestions = [
     "What should I say to close the sale?",
     "Can you help me ask for a raise?",
@@ -17,18 +16,25 @@ function AnimatedPlaceholder() {
 
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false); // fade out
+    if (!active) return;
+
+    intervalRef.current = setInterval(() => {
+      setVisible(false);
       setTimeout(() => {
         setIndex((i) => (i + 1) % suggestions.length);
-        setVisible(true); // fade in
-      }, 400); // match fade-out duration
+        setVisible(true);
+      }, 400);
     }, 4000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [active]);
+
+  if (!active) return null;
 
   return (
     <div
@@ -48,6 +54,7 @@ export default function Page({ onStart }: { onStart?: () => void }) {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [initialMessages, setInitialMessages] = useState<any[]>([]);
   const [loadingMessages, setLoadingMessages] = useState(true);
+  const [hasSentFirstMessage, setHasSentFirstMessage] = useState(false);
 
   // 1. Get or create session ID
   useEffect(() => {
@@ -123,15 +130,17 @@ export default function Page({ onStart }: { onStart?: () => void }) {
     const hasUserMessage = messages.some(
       (m) => m.role === "user" && m.content.trim() !== ""
     );
+
     if (hasUserMessage && !hasTriggeredStart.current) {
-      onStart?.(); // ✅ Notify parent
+      onStart?.();
       hasTriggeredStart.current = true;
     }
-  }, [messages, onStart]);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    // ✅ hide suggestions after first message
+    if (hasUserMessage && !hasSentFirstMessage) {
+      setHasSentFirstMessage(true);
+    }
+  }, [messages, onStart, hasSentFirstMessage]);
 
   const hasStarted = messages.some(
     (m) => m.role === "user" && m.content.trim() !== ""
@@ -223,7 +232,7 @@ export default function Page({ onStart }: { onStart?: () => void }) {
 
       <form onSubmit={handleSubmit}>
         <div className="relative w-full flex gap-3 mt-4">
-          {!input && <AnimatedPlaceholder />}
+          {<AnimatedPlaceholder active={!input && !hasSentFirstMessage} />}
 
           {/* Static Neon Logo Inside Textarea */}
           <Image
