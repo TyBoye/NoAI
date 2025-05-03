@@ -1,110 +1,98 @@
 "use client";
 
+import { useEffect, useState, useRef } from "react";
 import { useChat } from "@ai-sdk/react";
-import { ArrowUp } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
+import { ArrowUp } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
-export default function Page() {
-  const { user } = useUser();
+interface CoreMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+}
+
+export default function ChatPage() {
+  const { user, isLoaded } = useUser();
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("sessionId");
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [initialMessages, setInitialMessages] = useState<any[]>([]); // loaded from DB
-  const [loadingMessages, setLoadingMessages] = useState(true);
 
-  //  Get or create a session ID
-  useEffect(() => {
-    const stored = localStorage.getItem("neonSessionId");
-    if (stored) {
-      setSessionId(stored);
-    } else if (user?.id && !sessionId) {
-      const createSession = async () => {
-        const res = await fetch("/api/chat/new-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: user.id,
-            title: "Chat with Neon",
-          }),
-        });
-        const { sessionId } = await res.json();
-        localStorage.setItem("neonSessionId", sessionId);
-        setSessionId(sessionId);
-      };
+  const [initialMessages, setInitialMessages] = useState<CoreMessage[]>([]);
+  const [loadingHistory] = useState(false);
 
-      createSession();
-    }
-  }, [user, sessionId]);
-
-  // Load messages from DB
   useEffect(() => {
     if (!sessionId) return;
-
+  
     const loadMessages = async () => {
       const res = await fetch("/api/chat/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId }),
       });
-
+  
       if (res.ok) {
         const { messages } = await res.json();
-        const formatted = messages.map((msg: any) => ({
-          id: msg.id,
-          role: msg.role === "ai" ? "assistant" : "user",  // Dont change this
-          content: msg.content,
-        }));
-        setInitialMessages(formatted);
+  
+        setInitialMessages(
+          messages.map((msg: any) => ({
+            id: msg.id,
+            role: msg.role === "ai" ? "assistant" : "user",
+            content: msg.content,
+            created_at: msg.created_at,
+          }))
+        );
       }
-
-      setLoadingMessages(false);
     };
-
+  
     loadMessages();
   }, [sessionId]);
+  
 
   const {
     messages,
     input,
     handleInputChange,
     handleSubmit,
-    status,
+    reload,
     stop,
+    status,
   } = useChat({
     api: "/api/chat",
-    initialMessages,
     body: {
+      sessionId,
+      userId: user?.id,
       data: {
-        firstName: user?.firstName ?? "Guest",
-        lastName: user?.lastName ?? "",
-        userId: user?.id ?? "",
-        sessionId,
+        firstName: user?.firstName || "Friend",
+        lastName: user?.lastName || "",
       },
     },
+    initialMessages,
   });
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  if (!isLoaded || !user) return <div className="p-6">Loading...</div>;
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-
+    <div className="flex flex-col h-full p-4">
+      <div className="flex-1 overflow-y-auto space-y-4">
+        {loadingHistory && (
+          <p className="text-sm text-gray-500">Loading previous messages...</p>
+        )}
         {messages.map((message) => {
           const isUser = message.role === "user";
           return (
             <div
               key={message.id}
-              className={`flex flex-col ${
-                isUser ? "items-end" : "items-start"
-              }`}
+              className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}
             >
               <div className="text-sm text-black/35 font-semibold mb-1 px-2">
-                {isUser ? user?.firstName || "You" : "Neon"}
+                {isUser ? user.firstName || "You" : "Neon"}
               </div>
               <div
                 className={cn(
@@ -119,11 +107,10 @@ export default function Page() {
             </div>
           );
         })}
-
         {status === "submitted" && (
           <div className="flex items-start gap-3 justify-start">
             <div className="bg-muted bg-gradient-to-r from-[#ff914d] via-[#ff5e62] to-[#ff3c38] bg-clip-text text-transparent rounded-lg p-3 text-sm animate-pulse">
-              Cooking...
+              Thinking...
             </div>
           </div>
         )}
@@ -154,7 +141,7 @@ export default function Page() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="flex col-2 gap-3 mt-4">
+        <div className="flex gap-3 mt-4">
           <textarea
             name="prompt"
             value={input}
