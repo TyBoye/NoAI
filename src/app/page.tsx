@@ -15,11 +15,6 @@ import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
 
-
-
-  
-
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />

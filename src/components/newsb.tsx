@@ -24,7 +24,7 @@ const Logo = () => (
       viewBox="0 0 375 375"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      className="text-orange-500"
+      className="text-[#ff914d]"
     >
       <defs>
         <clipPath id="70dc2f3683">

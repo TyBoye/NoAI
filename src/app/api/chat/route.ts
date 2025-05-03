@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
 
     await writer.close();
 
-    // ✅ Save AI message
+    // save ai message to supabase
     const { error: aiMsgError } = await supabase.from("chat_messages").insert({
       session_id: currentSessionId,
       user_id: userId,
