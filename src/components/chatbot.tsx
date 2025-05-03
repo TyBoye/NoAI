@@ -144,7 +144,7 @@ export default function Page({ onStart }: { onStart?: () => void }) {
           <div className="text-left text-gray-800 text-lg md:text-xl py-6 md:py-20">
             <p className="mb-2">
               Hi there, I&apos;m{" "}
-              <span className="text-xl md:text-3xl font-bold text-orange-500">
+              <span className="text-xl md:text-3xl font-bold text-[#ff914d]">
                 Neon
               </span>
               , your personal negotiation assistant.
@@ -252,7 +252,7 @@ export default function Page({ onStart }: { onStart?: () => void }) {
 
           <button
             type="submit"
-            className="bg-[#ff914d] text-white px-2 py-1 rounded-lg hover:bg-white hover:text-orange-400 border shadow-md border-orange-500 transition-colors duration-300 h-[40px] self-end"
+            className="bg-[#ff914d] text-white px-2 py-1 rounded-lg hover:bg-white hover:text-orange-400 shadow-md transition-colors duration-300 h-[40px] self-end"
             disabled={status !== "ready"}
           >
             <ArrowUp className="w-5 h-5" />

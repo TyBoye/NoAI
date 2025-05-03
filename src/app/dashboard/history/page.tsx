@@ -54,8 +54,8 @@ export default function HistoryPage() {
       ) : (
         <ul className="space-y-3">
           {sessions.map((s) => (
-           <Link href={`/dashboard/chat?sessionId=${s.id}`}>
-           <li key={s.id} className="p-4 bg-white rounded shadow hover:bg-gray-100 transition cursor-pointer">
+           <Link key={s.id} href={`/dashboard/chat?sessionId=${s.id}`}>
+           <li className="p-4 bg-white rounded shadow hover:bg-gray-100 transition cursor-pointer">
              <div className="font-medium">{s.title}</div>
              <div className="text-sm text-gray-500">
                {new Date(s.created_at).toLocaleString()}
