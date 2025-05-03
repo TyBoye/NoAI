@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import { useChat } from "@ai-sdk/react";
 import { useUser } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
@@ -14,7 +14,7 @@ interface CoreMessage {
   content: string;
 }
 
-export default function ChatPage() {
+function ChatContent() {
   const { user, isLoaded } = useUser();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("sessionId");
@@ -166,5 +166,16 @@ export default function ChatPage() {
         </div>
       </form>
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={<div>
+      <div className="flex justify-center items-center h-screen w-full animate-spin"><Image src="/NoAI.svg" alt="NoAI Logo" width={64} height={64} />
+      </div>
+      </div>}>
+      <ChatContent />
+    </Suspense>
   );
 }
