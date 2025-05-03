@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 bg-gray-50">
+      <section id="features" className="pt-16 pb-26 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
             Why Practice with Negotiation.AI?
@@ -123,7 +123,7 @@ export default function Home() {
         </div>
       </section>
       {/* CTA Section */}
-      <section className="mt-10 py-16 bg-[#d8b48b]">
+      <section className="py-16 bg-[#d8b48b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6">
             Ready to Improve Your Negotiation Skills?
