@@ -46,7 +46,7 @@ export default function Page({ onStart }: { onStart?: () => void }) {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [initialMessages, setInitialMessages] = useState<any[]>([]);
+  const [initialMessages, setInitialMessages] = useState<[]>([]);
   const [loadingMessages, setLoadingMessages] = useState(true);
 
   // 1. Get or create session ID
