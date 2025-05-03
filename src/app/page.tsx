@@ -14,12 +14,6 @@ import Chat from "@/app/assets/test3.svg";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
-
-
-
-  
-
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -129,7 +123,7 @@ export default function Home() {
         </div>
       </section>
       {/* CTA Section */}
-      <section className="py-16 bg-[#d8b48b]">
+      <section className="mt-10 py-16 bg-[#d8b48b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6">
             Ready to Improve Your Negotiation Skills?
@@ -170,9 +164,7 @@ export default function Home() {
         </div>
       </section>
       {/* FAQ */}
-      <section>
-
-      </section>
+      <section></section>
 
       {/* Footer Section */}
       <Footer />

@@ -7,36 +7,73 @@ import { useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-export default function Page() {
+// ✅ Animated Placeholder Component
+function AnimatedPlaceholder() {
+  const suggestions = [
+    "What should I say to close the sale?",
+    "Can you help me ask for a raise?",
+    "Negotiate this contract in my favor.",
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false); // fade out
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % suggestions.length);
+        setVisible(true); // fade in
+      }, 400); // match fade-out duration
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      className={cn(
+        "absolute left-9 top-2 text-gray-400 pointer-events-none select-none text-sm transition-all duration-500 ease-in-out",
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+      )}
+    >
+      {suggestions[index]}
+    </div>
+  );
+}
+
+export default function Page({ onStart }: { onStart?: () => void }) {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [initialMessages, setInitialMessages] = useState<[]>([]); // loaded from DB
+  const [initialMessages, setInitialMessages] = useState<any[]>([]);
   const [loadingMessages, setLoadingMessages] = useState(true);
 
-  // 1. Get or create a session ID
+  // 1. Get or create session ID
   useEffect(() => {
+    if (!user?.id) return;
     const stored = localStorage.getItem("neonSessionId");
     if (stored) {
       setSessionId(stored);
-    } else if (user?.id && !sessionId) {
-      const createSession = async () => {
-        const res = await fetch("/api/chat/new-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: user.id,
-            title: "Chat with Neon",
-          }),
-        });
-        const { sessionId } = await res.json();
-        localStorage.setItem("neonSessionId", sessionId);
-        setSessionId(sessionId);
-      };
-
-      createSession();
+      return;
     }
-  }, [user, sessionId]);
+
+    const createSession = async () => {
+      const res = await fetch("/api/chat/new-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.id,
+          title: "Chat with Neon",
+        }),
+      });
+      const { sessionId } = await res.json();
+      localStorage.setItem("neonSessionId", sessionId);
+      setSessionId(sessionId);
+    };
+
+    createSession();
+  }, [user?.id]);
 
   // 2. Load messages from DB
   useEffect(() => {
@@ -51,11 +88,13 @@ export default function Page() {
 
       if (res.ok) {
         const { messages } = await res.json();
-        const formatted = messages.map((msg: { id: string; role: string; content: string }) => ({
-          id: msg.id,
-          role: msg.role === "ai" ? "assistant" : "user", // convert to expected roles
-          content: msg.content,
-        }));
+        const formatted = messages.map(
+          (msg: { id: string; role: string; content: string }) => ({
+            id: msg.id,
+            role: msg.role === "ai" ? "assistant" : "user",
+            content: msg.content,
+          })
+        );
         setInitialMessages(formatted);
       }
 
@@ -65,25 +104,30 @@ export default function Page() {
     loadMessages();
   }, [sessionId]);
 
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    status,
-    stop,
-  } = useChat({
-    api: "/api/chat",
-    initialMessages,
-    body: {
-      data: {
-        firstName: user?.firstName ?? "Guest",
-        lastName: user?.lastName ?? "",
-        userId: user?.id ?? "",
-        sessionId,
+  const { messages, input, handleInputChange, handleSubmit, status, stop } =
+    useChat({
+      api: "/api/chat",
+      initialMessages,
+      body: {
+        data: {
+          firstName: user?.firstName ?? "Guest",
+          lastName: user?.lastName ?? "",
+          userId: user?.id ?? "",
+          sessionId,
+        },
       },
-    },
-  });
+    });
+  const hasTriggeredStart = useRef(false);
+
+  useEffect(() => {
+    const hasUserMessage = messages.some(
+      (m) => m.role === "user" && m.content.trim() !== ""
+    );
+    if (hasUserMessage && !hasTriggeredStart.current) {
+      onStart?.(); // ✅ Notify parent
+      hasTriggeredStart.current = true;
+    }
+  }, [messages, onStart]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -107,9 +151,10 @@ export default function Page() {
             </p>
             <br />
             <p className="hidden md:block">
-              I&apos;m here to help you navigate deals, resolve conflicts, and find
-              the best outcomes. Whether it&apos;s a business deal or daily decision,
-              I&apos;m ready to support you with smart strategies and clear advice.
+              I&apos;m here to help you navigate deals, resolve conflicts, and
+              find the best outcomes. Whether it&apos;s a business deal or daily
+              decision, I&apos;m ready to support you with smart strategies and
+              clear advice.
             </p>
             <p className="text-lg md:text-xl text-gray-800 mt-5 md:mt-10">
               What are we negotiating today?
@@ -177,7 +222,18 @@ export default function Page() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="flex col-2 gap-3 mt-4">
+        <div className="relative w-full flex gap-3 mt-4">
+          {!input && <AnimatedPlaceholder />}
+
+          {/* Static Neon Logo Inside Textarea */}
+          <Image
+            src="/NoAI.svg"
+            alt="Neon Logo"
+            width={18}
+            height={18}
+            className="absolute left-2 top-2.5 z-10 opacity-100"
+          />
+
           <textarea
             name="prompt"
             value={input}
@@ -189,10 +245,11 @@ export default function Page() {
               }
             }}
             disabled={status !== "ready"}
-            className="flex-1 min-h-7 max-h-60 px-3 py-2 rounded-md resize-none outline-none ring-2 ring-[#ff914d] border-transparent"
+            className="flex-1 min-h-7 max-h-60 pl-9 pr-3 py-2 rounded-md resize-none outline-none ring-2 ring-[#ff914d] border-transparent placeholder-transparent"
             rows={1}
             placeholder="Type your message..."
           />
+
           <button
             type="submit"
             className="bg-[#ff914d] text-white px-2 py-1 rounded-lg hover:bg-white hover:text-orange-400 border shadow-md border-orange-500 transition-colors duration-300 h-[40px] self-end"

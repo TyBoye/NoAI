@@ -15,7 +15,6 @@ import {
 import "@/app/globals.css";
 import { Plus } from "lucide-react";
 
-
 const Logo = () => (
   <div className="flex items-center gap-2">
     <svg
@@ -63,17 +62,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useUser();
   const { openUserProfile } = useClerk();
 
-
- 
-
   return (
     <>
       <SidebarProvider>
         <Sidebar {...props}>
           <SidebarHeader>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
+              <SidebarMenuItem className="flex w-full justify-center mt-4">
+                <SidebarMenuButton className="flex items-center justify-center">
                   <Link href="/">
                     <Logo />
                   </Link>
@@ -83,20 +79,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarHeader>
           <SidebarContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton 
-                  className="bg-orange-100 mt-4 py-5 px-2 flex w-full justify-center"
-                >
-                  <span className="text-md font-semibold">
+              <SidebarMenuItem className=" flex w-full justify-center mt-4">
+                <SidebarMenuButton className="mt-4 w-5/6 flex items-center justify-center gap-2 rounded-md border border-orange-200 bg-orange-50 px-4 py-3 transition hover:bg-orange-100 hover:cursor-pointer">
+                  <Plus className="h-4 w-4 text-orange-500" />
+                  <span className="text-sm font-semibold text-orange-500">
                     New Negotiation
                   </span>
-                  <Plus className="h-4 w-4" />
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              <SidebarMenuItem className="flex w-full justify-center mt-4">
-                <span className="text-sm font-light">Recent Negotiations</span>
-              </SidebarMenuItem>
+              {/* <SidebarMenuItem className="flex w-full justify-center mt-8">
+                <span className="text-sm text-gray-500 font-medium uppercase">
+                  Recent Chats
+                </span>
+              </SidebarMenuItem> */}
             </SidebarMenu>
           </SidebarContent>
           <SidebarFooter className="flex flex-col gap-2 items-stretch">
