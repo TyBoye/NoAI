@@ -14,7 +14,7 @@ export default function Page() {
   const [initialMessages, setInitialMessages] = useState<any[]>([]); // loaded from DB
   const [loadingMessages, setLoadingMessages] = useState(true);
 
-  //  Get or create a session ID
+  // 1. Get or create a session ID
   useEffect(() => {
     const stored = localStorage.getItem("neonSessionId");
     if (stored) {
@@ -38,7 +38,7 @@ export default function Page() {
     }
   }, [user, sessionId]);
 
-  // Load messages from DB
+  // 2. Load messages from DB
   useEffect(() => {
     if (!sessionId) return;
 
@@ -53,7 +53,7 @@ export default function Page() {
         const { messages } = await res.json();
         const formatted = messages.map((msg: any) => ({
           id: msg.id,
-          role: msg.role === "ai" ? "assistant" : "user",  // Dont change this
+          role: msg.role === "ai" ? "assistant" : "user", // convert to expected roles
           content: msg.content,
         }));
         setInitialMessages(formatted);
@@ -70,6 +70,7 @@ export default function Page() {
     input,
     handleInputChange,
     handleSubmit,
+    reload,
     status,
     stop,
   } = useChat({
@@ -89,10 +90,33 @@ export default function Page() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const hasStarted = messages.some(
+    (m) => m.role === "user" && m.content.trim() !== ""
+  );
 
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {!hasStarted && !loadingMessages && (
+          <div className="text-left text-gray-800 text-lg md:text-xl py-6 md:py-20">
+            <p className="mb-2">
+              Hi there, I'm{" "}
+              <span className="text-xl md:text-3xl font-bold text-orange-500">
+                Neon
+              </span>
+              , your personal negotiation assistant.
+            </p>
+            <br />
+            <p className="hidden md:block">
+              I'm here to help you navigate deals, resolve conflicts, and find
+              the best outcomes. Whether it's a business deal or daily decision,
+              I'm ready to support you with smart strategies and clear advice.
+            </p>
+            <p className="text-lg md:text-xl text-gray-800 mt-5 md:mt-10">
+              What are we negotiating today?
+            </p>
+          </div>
+        )}
 
         {messages.map((message) => {
           const isUser = message.role === "user";
