@@ -100,7 +100,7 @@ export default function Page() {
         {!hasStarted && !loadingMessages && (
           <div className="text-left text-gray-800 text-lg md:text-xl py-6 md:py-20">
             <p className="mb-2">
-              Hi there, I'm{" "}
+              Hi there, I&apos;m{" "}
               <span className="text-xl md:text-3xl font-bold text-orange-500">
                 Neon
               </span>
@@ -108,9 +108,9 @@ export default function Page() {
             </p>
             <br />
             <p className="hidden md:block">
-              I'm here to help you navigate deals, resolve conflicts, and find
-              the best outcomes. Whether it's a business deal or daily decision,
-              I'm ready to support you with smart strategies and clear advice.
+              I&apos;m here to help you navigate deals, resolve conflicts, and find
+              the best outcomes. Whether it&apos;s a business deal or daily decision,
+              I&apos;m ready to support you with smart strategies and clear advice.
             </p>
             <p className="text-lg md:text-xl text-gray-800 mt-5 md:mt-10">
               What are we negotiating today?
