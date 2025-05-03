@@ -81,8 +81,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenu>
               <SidebarMenuItem className=" flex w-full justify-center mt-4">
                 <SidebarMenuButton className="mt-4 w-5/6 flex items-center justify-center gap-2 rounded-md border border-orange-200 bg-orange-50 px-4 py-3 transition hover:bg-orange-100 hover:cursor-pointer">
-                  <Plus className="h-4 w-4 text-orange-500" />
-                  <span className="text-sm font-semibold text-orange-500">
+                  <Plus className="h-4 w-4 text-[#ff914d]" />
+                  <span className="text-sm font-semibold text-[#ff914d]">
                     New Negotiation
                   </span>
                 </SidebarMenuButton>
