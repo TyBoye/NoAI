@@ -11,7 +11,7 @@ export default function Page() {
   const { user } = useUser();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [initialMessages, setInitialMessages] = useState<any[]>([]); // loaded from DB
+  const [initialMessages, setInitialMessages] = useState<[]>([]); // loaded from DB
   const [loadingMessages, setLoadingMessages] = useState(true);
 
   // 1. Get or create a session ID
@@ -51,7 +51,7 @@ export default function Page() {
 
       if (res.ok) {
         const { messages } = await res.json();
-        const formatted = messages.map((msg: any) => ({
+        const formatted = messages.map((msg: { id: string; role: string; content: string }) => ({
           id: msg.id,
           role: msg.role === "ai" ? "assistant" : "user", // convert to expected roles
           content: msg.content,
@@ -70,7 +70,6 @@ export default function Page() {
     input,
     handleInputChange,
     handleSubmit,
-    reload,
     status,
     stop,
   } = useChat({

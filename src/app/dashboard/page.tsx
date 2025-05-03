@@ -8,7 +8,7 @@ import Link from "next/link";
 
 
 export default function Dashboard() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
 
   if (!isLoaded) return <div>
     <div className="flex justify-center items-center h-screen w-full animate-spin"><Image src="/NoAI.svg" alt="NoAI Logo" width={128} height={128} />
