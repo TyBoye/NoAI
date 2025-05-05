@@ -142,6 +142,13 @@ export default function Page({ onStart }: { onStart?: () => void }) {
     }
   }, [messages, onStart, hasSentFirstMessage]);
 
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+  
+
   const hasStarted = messages.some(
     (m) => m.role === "user" && m.content.trim() !== ""
   );
