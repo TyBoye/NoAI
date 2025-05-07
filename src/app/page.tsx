@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { BrainCog, Zap, Building2 } from "lucide-react";
-import Chat from "@/app/assets/test3.svg";
+import Chat from "@/app/assets/test4.svg";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
