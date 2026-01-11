@@ -1,11 +1,10 @@
 import { NextRequest } from "next/server";
 import { supabase } from "@/lib/supabase";
-import { createGroq } from "@ai-sdk/groq";
+import { createOpenAI } from "@ai-sdk/openai";
 import { CoreMessage, streamText } from "ai";
 
-const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY!,
-  baseURL: "https://api.groq.com/openai/v1",
+const openai = createOpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 export async function POST(req: NextRequest) {
@@ -88,7 +87,7 @@ export async function POST(req: NextRequest) {
 
   //  Gets AI response and stream
   const result = await streamText({
-    model: groq("llama-3.1-8b-instant"),
+    model: openai("gpt-4o-mini"), // You can change this to "gpt-4", "gpt-3.5-turbo", or "gpt-4o" as needed
     messages,
     system: `Your name is Neon, a highly skilled, human-like negotiation coach.
     You help users improve their negotiation strategies by:
