@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { supabase } from "@/lib/supabase";
+// import { supabase } from "@/lib/supabase"; // Commented out - Supabase disabled
 
 export async function POST(req: NextRequest) {
   const { userId } = await req.json();
@@ -8,16 +8,16 @@ export async function POST(req: NextRequest) {
     return new Response("Missing userId", { status: 400 });
   }
 
-  const { data: sessions, error } = await supabase
-    .from("chat_sessions")
-    .select("id, title, created_at")
-    .eq("user_id", userId)
-    .order("created_at", { ascending: false });
+  // Commented out - Supabase disabled, returning empty sessions
+  // const { data: sessions, error } = await supabase
+  //   .from("chat_sessions")
+  //   .select("id, title, created_at")
+  //   .eq("user_id", userId)
+  //   .order("created_at", { ascending: false });
+  // if (error) {
+  //   console.error("Failed to fetch sessions:", error);
+  //   return new Response("Database error", { status: 500 });
+  // }
 
-  if (error) {
-    console.error("Failed to fetch sessions:", error);
-    return new Response("Database error", { status: 500 });
-  }
-
-  return Response.json({ sessions });
+  return Response.json({ sessions: [] });
 }

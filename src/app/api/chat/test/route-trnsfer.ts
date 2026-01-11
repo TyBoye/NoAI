@@ -1,4 +1,4 @@
-import { createGroq } from "@ai-sdk/groq";
+import { createOpenAI } from "@ai-sdk/openai";
 import { streamText } from "ai";
 import {
   getOrCreateUser,
@@ -6,9 +6,8 @@ import {
   saveMessage,
 } from "@/lib/chat"; // im curious if this can be its own route.
 
-const groq = createGroq({
-  apiKey: process.env.GROQ_API_KEY,
-  baseURL: "https://api.groq.com/openai/v1",
+const openai = createOpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 export const maxDuration = 30;
@@ -28,7 +27,7 @@ export async function POST(req: Request) {
     console.log("User ID:", userId);
 
     // Get or create conversation
-    const conversationId = await getOrCreateConversation(userId);
+    const conversationId = await getOrCreateConversation();
     console.log("Conversation ID:", conversationId);
 
     // Extracting the user's last message for saving to DB
@@ -43,69 +42,55 @@ export async function POST(req: Request) {
       }
     ];
 
-    // Save user message to the database
-    await saveMessage(conversationId, "user", lastUserMessage);
-    console.log("User message saved to DB");
+    // Save user message to the database (disabled - Supabase commented out)
+    // await saveMessage(conversationId, "user", lastUserMessage);
+    console.log("User message saved to DB (disabled)");
 
     // Send user messages to AI
     const result = streamText({
-      model: groq("llama-3.1-8b-instant"),
+      model: openai("gpt-4o-mini"),
       messages: messagesWithSystem,
     });
 
-    // Get the response as a stream
-    const aiResponse = await result.toDataStreamResponse({
-      sendUsage: false,
-      getErrorMessage: (error) => {
-        console.error("AI Error:", error);
-        return "An error occurred while generating a response. Please try again.";
-      },
-    });
+    // Get the text stream and process it
+    const stream = result.textStream;
+    const reader = stream.getReader();
+    const encoder = new TextEncoder();
+    let aiText = "";
 
-    // Check if aiResponse.body exists
-    if (!aiResponse.body) {
-      console.error("AI response body is null");
-      return new Response(JSON.stringify({ 
-        error: "Failed to get response stream from AI service." 
-      }), { 
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    }
+    const { readable, writable } = new TransformStream();
+    const writer = writable.getWriter();
 
-    // Clone the stream so we can use it in two places
-    const [stream1, stream2] = aiResponse.body.tee();
-
-    // Process one stream to save to DB
-    let completeResponse = '';
-    
-    // Start a background task to save the complete message once assembled
     (async () => {
-      const reader = stream1.getReader();
       try {
         while (true) {
           const { value, done } = await reader.read();
           if (done) break;
-          if (value) {
-            completeResponse += new TextDecoder().decode(value);
-          }
+
+          // textStream returns strings directly
+          const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
+          aiText += chunk;
+          await writer.write(encoder.encode(chunk));
         }
-        // Save the complete AI response to DB once streaming is finished
-        await saveMessage(conversationId, "ai", completeResponse);
-        console.log("AI message saved to DB:", completeResponse);
+
+        await writer.close();
+
+        // Save the complete AI response to DB once streaming is finished (disabled - Supabase commented out)
+        // if (aiText.trim()) {
+        //   await saveMessage(conversationId, "ai", aiText.trim());
+        //   console.log("AI message saved to DB");
+        // }
       } catch (error) {
         console.error("Error processing AI response stream:", error);
+        await writer.abort(error);
       }
     })();
 
-    // Return the other stream to the client
-    return new Response(stream2, {
+    // Return the stream to the client
+    return new Response(readable, {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
         'Transfer-Encoding': 'chunked',
-        ...aiResponse.headers
       }
     });
     
