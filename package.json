@@ -9,10 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/groq": "^1.2.8",
     "@ai-sdk/openai": "^3.0.7",
-    "@ai-sdk/react": "^1.2.9",
-    "@ai-sdk/xai": "^1.2.11",
+    "@ai-sdk/react": "^3.0.29",
     "@clerk/clerk-js": "^5.61.2",
     "@clerk/nextjs": "^6.14.3",
     "@radix-ui/react-dialog": "^1.1.11",
