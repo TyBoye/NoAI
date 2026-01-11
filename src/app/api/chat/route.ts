@@ -95,17 +95,45 @@ export async function POST(req: NextRequest) {
   `.trim()
   });
 
-  // Return the response using toUIMessageStreamResponse - this is the recommended method for useChat
-  // This handles the proper data stream format that useChat expects
-  const response = await result.toUIMessageStreamResponse();
-  
-  // Add custom header for session ID
-  const headers = new Headers(response.headers);
-  headers.set("x-session-id", currentSessionId);
-  
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: headers,
+  // Return the response in the data stream format that useChat v1.2.12 expects
+  // Format: "0:" + JSON.stringify(text) + "\n" for each chunk
+  const textStream = result.textStream;
+  const reader = textStream.getReader();
+  const encoder = new TextEncoder();
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) {
+            // Stream is complete - close it
+            controller.close();
+            break;
+          }
+          // Format as data stream: "0:" + JSON.stringify(text) + "\n"
+          // textStream returns strings directly
+          const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
+          // Format: 0:"text content"\n (this is what useChat v1.2.12 expects)
+          const formatted = `0:${JSON.stringify(chunk)}\n`;
+          controller.enqueue(encoder.encode(formatted));
+        }
+      } catch (error) {
+        console.error("Error in stream:", error);
+        // Send error in data stream format
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        controller.enqueue(encoder.encode(`1:${JSON.stringify({ error: errorMessage })}\n`));
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
+      "x-session-id": currentSessionId,
+    },
   });
 }

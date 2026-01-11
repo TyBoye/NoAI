@@ -115,6 +115,7 @@ export default function Page({ onStart }: { onStart?: () => void }) {
     useChat({
       api: "/api/chat",
       initialMessages,
+      streamProtocol: "data", // Explicitly set to data stream protocol
       body: {
         data: {
           firstName: user?.firstName ?? "Guest",
