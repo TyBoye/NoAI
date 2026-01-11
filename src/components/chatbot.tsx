@@ -111,7 +111,7 @@ export default function Page({ onStart }: { onStart?: () => void }) {
     loadMessages();
   }, [sessionId]);
 
-  const { messages, input, handleInputChange, handleSubmit, status, stop } =
+  const { messages, input, handleInputChange, handleSubmit, status, stop, error } =
     useChat({
       api: "/api/chat",
       initialMessages,
@@ -122,6 +122,16 @@ export default function Page({ onStart }: { onStart?: () => void }) {
           userId: user?.id ?? "",
           sessionId,
         },
+      },
+      onError: (error) => {
+        console.error("Chat error:", error);
+      },
+      onFinish: (message) => {
+        console.log("Message finished:", message);
+        // Force status to ready if it gets stuck
+        if (status !== "ready") {
+          console.log("Status was not ready after finish, current status:", status);
+        }
       },
     });
   const hasTriggeredStart = useRef(false);
@@ -147,6 +157,22 @@ export default function Page({ onStart }: { onStart?: () => void }) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  // Debug: Log status changes
+  useEffect(() => {
+    console.log("Chat status:", status);
+  }, [status]);
+
+  // Workaround: If status is stuck in submitted/streaming for too long, try to reset
+  useEffect(() => {
+    if (status === "submitted" || status === "streaming") {
+      const timeout = setTimeout(() => {
+        console.warn("Status stuck in", status, "for 30 seconds, attempting to stop");
+        stop();
+      }, 30000); // 30 second timeout
+      return () => clearTimeout(timeout);
+    }
+  }, [status, stop]);
   
 
   const hasStarted = messages.some(
@@ -208,6 +234,13 @@ export default function Page({ onStart }: { onStart?: () => void }) {
           <div className="flex items-start gap-3 justify-start">
             <div className="bg-muted bg-gradient-to-r from-[#ff914d] via-[#ff5e62] to-[#ff3c38] bg-clip-text text-transparent rounded-lg p-3 text-sm animate-pulse">
               Cooking...
+            </div>
+          </div>
+        )}
+        {error && (
+          <div className="flex items-start gap-3 justify-start">
+            <div className="bg-red-100 text-red-800 rounded-lg p-3 text-sm">
+              Error: {error.message || "Failed to get response"}
             </div>
           </div>
         )}

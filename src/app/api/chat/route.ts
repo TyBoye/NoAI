@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
   });
 
   // Return the response in the data stream format that useChat expects
-  // useChat from @ai-sdk/react v1.2.12 expects: "0:" + JSON.stringify(text) + "\n"
+  // useChat from @ai-sdk/react v1.2.12 expects the data stream format
   const textStream = result.textStream;
   const reader = textStream.getReader();
   const encoder = new TextEncoder();
@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
         while (true) {
           const { value, done } = await reader.read();
           if (done) {
-            // Send completion marker that useChat expects
+            // Send completion marker - useChat expects this to know the stream is done
             controller.enqueue(encoder.encode("0:[DONE]\n"));
             controller.close();
             break;
@@ -121,7 +121,10 @@ export async function POST(req: NextRequest) {
         }
       } catch (error) {
         console.error("Error in stream:", error);
-        controller.error(error);
+        // Send error in data stream format
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        controller.enqueue(encoder.encode(`1:${JSON.stringify({ error: errorMessage })}\n`));
+        controller.close();
       }
     },
   });
@@ -129,6 +132,8 @@ export async function POST(req: NextRequest) {
   return new Response(stream, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
       "x-session-id": currentSessionId,
     },
   });
