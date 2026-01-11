@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 interface Session {
   id: string;
   title: string;

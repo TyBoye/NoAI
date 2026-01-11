@@ -13,6 +13,8 @@ import { BrainCog, Zap, Building2 } from "lucide-react";
 import Chat from "@/app/assets/test4.svg";
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">

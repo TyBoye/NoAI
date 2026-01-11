@@ -3,7 +3,7 @@ import { streamText } from "ai";
 import {
   getOrCreateUser,
   getOrCreateConversation,
-  saveMessage,
+  // saveMessage, // Commented out - Supabase disabled
 } from "@/lib/chat"; // im curious if this can be its own route.
 
 const openai = createOpenAI({
@@ -30,8 +30,8 @@ export async function POST(req: Request) {
     const conversationId = await getOrCreateConversation();
     console.log("Conversation ID:", conversationId);
 
-    // Extracting the user's last message for saving to DB
-    const lastUserMessage = userMessages[userMessages.length - 1].content;
+    // Extracting the user's last message for saving to DB (disabled - Supabase commented out)
+    // const lastUserMessage = userMessages[userMessages.length - 1].content;
     
     // Add system message for AI context
     const messagesWithSystem = [
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
     const stream = result.textStream;
     const reader = stream.getReader();
     const encoder = new TextEncoder();
-    let aiText = "";
+    // let aiText = ""; // Commented out - not saving to DB
 
     const { readable, writable } = new TransformStream();
     const writer = writable.getWriter();
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
 
           // textStream returns strings directly
           const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
-          aiText += chunk;
+          // aiText += chunk; // Commented out - not saving to DB
           await writer.write(encoder.encode(chunk));
         }
 

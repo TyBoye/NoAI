@@ -4,6 +4,8 @@ import React from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
+export const dynamic = 'force-dynamic';
+
 export default function AboutUs() {
   return (
     <div className="bg-white text-black min-h-screen flex flex-col">

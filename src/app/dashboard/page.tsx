@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+export const dynamic = 'force-dynamic';
+
 export default function Dashboard() {
   const { isSignedIn, isLoaded, user } = useUser();
   const [hasStarted, setHasStarted] = useState(false); // ✅ Track if chat started
