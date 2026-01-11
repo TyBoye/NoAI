@@ -95,49 +95,38 @@ export async function POST(req: NextRequest) {
   `.trim()
   });
 
-  // Get the text stream and process it
-  const stream = result.textStream;
-  const reader = stream.getReader();
+  // Return the response in the data stream format that useChat expects
+  // useChat from @ai-sdk/react v1.2.12 expects: "0:" + JSON.stringify(text) + "\n"
+  const textStream = result.textStream;
+  const reader = textStream.getReader();
   const encoder = new TextEncoder();
 
-  const { readable, writable } = new TransformStream();
-  const writer = writable.getWriter();
-
-  (async () => {
-    try {
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-
-        // textStream returns strings directly, not Uint8Array
-        const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
-        await writer.write(encoder.encode(chunk));
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) {
+            // Send completion marker that useChat expects
+            controller.enqueue(encoder.encode("0:[DONE]\n"));
+            controller.close();
+            break;
+          }
+          // Format as data stream: "0:" + JSON.stringify(text) + "\n"
+          // textStream returns strings directly
+          const chunk = typeof value === 'string' ? value : new TextDecoder().decode(value);
+          // Format: 0:"text content"\n (this is what useChat expects)
+          const formatted = `0:${JSON.stringify(chunk)}\n`;
+          controller.enqueue(encoder.encode(formatted));
+        }
+      } catch (error) {
+        console.error("Error in stream:", error);
+        controller.error(error);
       }
+    },
+  });
 
-      await writer.close();
-
-      // Commented out - Supabase message saving
-      // const aiText = ""; // Would accumulate here if saving to DB
-      // if (aiText.trim()) {
-      //   const { error: aiMsgError } = await supabase.from("chat_messages").insert({
-      //     session_id: currentSessionId,
-      //     user_id: userId,
-      //     role: "ai",
-      //     content: aiText.trim(),
-      //   });
-      //   if (aiMsgError) {
-      //     console.error("Failed to insert AI message:", aiMsgError);
-      //   } else {
-      //     console.log("AI message saved to DB");
-      //   }
-      // }
-    } catch (error) {
-      console.error("Error processing stream:", error);
-      await writer.abort(error);
-    }
-  })();
-
-  return new Response(readable, {
+  return new Response(stream, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "x-session-id": currentSessionId,
