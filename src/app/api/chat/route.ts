@@ -95,9 +95,9 @@ export async function POST(req: NextRequest) {
   `.trim()
   });
 
-  // Return the response using toTextStreamResponse which should work with useChat
-  // This is the official method that handles the proper format
-  const response = await result.toTextStreamResponse();
+  // Return the response using toUIMessageStreamResponse - this is the recommended method for useChat
+  // This handles the proper data stream format that useChat expects
+  const response = await result.toUIMessageStreamResponse();
   
   // Add custom header for session ID
   const headers = new Headers(response.headers);
