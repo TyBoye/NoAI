@@ -27,7 +27,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.487.0",
     "negotiationai_nextjsv2": "file:",
-    "next": "15.3.0",
+    "next": "15.3.8",
     "openai": "^4.93.0",
     "radix-ui": "^1.2.0",
     "react": "^19.0.0",
